@@ -37,8 +37,10 @@
 								</div>
 								<b-button @click="submit" variant="primary" class="session-btn mb-15">{{$t('message.login')}}
 								</b-button>
-								<a href="javascript:void(0)" @click="onCreateAccount"
+								<a href="javascript:void(0)"
 									class="text-center fs-12 d-block text-success">{{$t('message.dontHaveAnAccount')}}</a>
+								<!-- <a href="javascript:void(0)" @click="onCreateAccount"
+									class="text-center fs-12 d-block text-success">{{$t('message.dontHaveAnAccount')}}</a> -->
 							</b-form>
 						</div>
 					</div>
@@ -109,7 +111,7 @@
 		},
 		methods: {
 			submit() {
-				// evt.preventDefault();
+				evt.preventDefault();
 				const user = {
 					email: this.form.email,
 					password: this.form.password
