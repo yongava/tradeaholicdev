@@ -17,7 +17,7 @@
 								class="fs-12 d-block w-75 mx-auto">{{$t('message.enterUsernameAndPasswordToAccessControlPanelOfAdminify')}}</span>
 						</div>
 						<div class="form-wrapper">
-							<b-form>
+							<b-form @submit="submit">
 								<b-form-group id="exampleInputGroup1" label="E-mail ID" label-for="emailInput1">
 									<b-form-input id="emailInput1" type="email" v-model="form.email" required
 										placeholder="Enter Your Email">
@@ -35,7 +35,7 @@
 									<a href="javascript:;"
 										class="text-danger text-center fs-12 d-block">{{$t('message.forgotPassword')}}</a>
 								</div>
-								<b-button @click="submit" variant="primary" class="session-btn mb-15">{{$t('message.login')}}
+								<b-button type="submit" variant="primary" class="session-btn mb-15">{{$t('message.login')}}
 								</b-button>
 								<a href="javascript:void(0)"
 									class="text-center fs-12 d-block text-success">{{$t('message.dontHaveAnAccount')}}</a>
@@ -104,13 +104,13 @@
 		data: function () {
 			return {
 				form: {
-					email: 'tradeaholic365',
+					email: 'tradeaholic365@gmail.com',
 					password: 'testpassword',
 				}
 			}
 		},
 		methods: {
-			submit() {
+			submit(evt) {
 				evt.preventDefault();
 				const user = {
 					email: this.form.email,
