@@ -114,7 +114,7 @@ const mutations = {
 		state.user = user;
 		localStorage.setItem('user', JSON.stringify(user));
 		state.isUserSigninWithAuth0 = false
-		router.push("/dashboard/dashboard-v1");
+		router.push("/summary/international");
 		setTimeout(function () {
 			Vue.notify({
 				group: 'loggedIn',
@@ -147,7 +147,7 @@ const mutations = {
 	},
 	signUpUserSuccess(state, user) {
 		state.user = localStorage.setItem('user', user);
-		router.push("/dashboard/dashboard-v1");
+		router.push("/summary/international");
 		Vue.notify({
 			group: 'loggedIn',
 			type: 'success',

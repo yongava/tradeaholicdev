@@ -1,6 +1,78 @@
 export default {
 	"routes": [
 		{
+			"menu_title": "message.marketSummary",
+			"menu_icon": "zmdi zmdi-view-dashboard",
+			"active": false,
+			"child_routes": [
+				{
+					"path": "/summary/international",
+					"menu_title": "message.international"
+				},
+				{
+					"route_name": "summary-local",
+					"path": "/summary/local",
+					"menu_title": "message.local"
+				}
+			]
+		},
+		{
+			"menu_title": "message.tradingValue",
+			"menu_icon": "zmdi zmdi-star-circle",
+			"active": false,
+			"child_routes": [
+				{
+					"route_name": "trading-tfex",
+					"path": "/trading/set",
+					"menu_title": "message.set"
+				},
+				{
+					"route_name": "summary-local",
+					"path": "/trading/tfex",
+					"menu_title": "message.tfex"
+				}
+			]
+		},
+		{
+			"menu_title": "message.marketBreadth",
+			"menu_icon": "zmdi zmdi-mouse",
+			"active": false,
+			"child_routes": [
+				{
+					"route_name": "breadth-members",
+					"path": "/breadth/members",
+					"menu_title": "message.members"
+				},
+				{
+					"route_name": "breadth-membersMa100",
+					"path": "/breadth/membersMa100",
+					"menu_title": "message.membersMa100"
+				}
+			]
+		},
+		{
+			"menu_title": "message.rrg",
+			"menu_icon": "zmdi zmdi-view-web",
+			"active": false,
+			"child_routes": [
+				{
+					"route_name": "rrg-set",
+					"path": "/rrg/set",
+					"menu_title": "message.set"
+				},
+				{
+					"route_name": "rrg-industry",
+					"path": "/rrg/industry",
+					"menu_title": "message.industry"
+				},
+				{
+					"route_name": "rrg-sector",
+					"path": "/rrg/sector",
+					"menu_title": "message.sector"
+				}
+			]
+		},
+		/*{
 			"menu_title": "message.dashboard",
 			"menu_icon": "zmdi zmdi-view-dashboard",
 			"active": false,
@@ -296,6 +368,6 @@ export default {
 					"menu_title": "message.dropzone"
 				}
 			]
-		}
+		}*/
 	]
 }

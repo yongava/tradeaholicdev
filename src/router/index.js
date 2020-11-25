@@ -4,6 +4,23 @@ import Router from 'vue-router'
 // components
 import Full from '@/container/Full'
 
+// market summary
+const SummaryInternational = () => import('Views/summary/International')
+const SummaryLocal = () => import('Views/summary/Local')
+
+// trading
+const TradingSet = () => import('Views/trading/Set')
+const TradingTfex = () => import('Views/trading/Tfex')
+
+// market breadth
+const BreadthMembers = () => import('Views/breadth/Members')
+const BreadthMembersMa100 = () => import('Views/breadth/MembersMa100')
+
+// rrg
+const RrgSet = () => import('Views/rrg/Set')
+const RrgIndustry = () => import('Views/rrg/Industry')
+const RrgSector = () => import('Views/rrg/Sector')
+
 // dashboard views
 const DashboardOne = () => import('Views/dashboard/DashboardOne')
 const DashboardTwo = () => import('Views/dashboard/DashboardTwo')
@@ -91,8 +108,98 @@ export default new Router({
 		{
 			path: '/',
 			component: Full,
-			redirect: '/dashboard/dashboard-v1',
+			redirect: '/summary/international',
 			children: [
+				{
+					name: "Summary International",
+					path: "/summary/international",
+					component: SummaryInternational,
+					meta: {
+						requiresAuth: true,
+						title: 'message.international',
+						breadcrumb: 'message.summaryInternational'
+					}
+				},
+				{
+					name: "Summary Local",
+					path: "/summary/local",
+					component: SummaryLocal,
+					meta: {
+						requiresAuth: true,
+						title: 'message.local',
+						breadcrumb: 'message.summaryLocal'
+					}
+				},
+				{
+					name: "Trading SET",
+					path: "/trading/set",
+					component: TradingSet,
+					meta: {
+						requiresAuth: true,
+						title: 'message.set',
+						breadcrumb: 'message.tradingSet'
+					}
+				},
+				{
+					name: "Trading TFEX",
+					path: "/trading/tfex",
+					component: TradingTfex,
+					meta: {
+						requiresAuth: true,
+						title: 'message.tfex',
+						breadcrumb: 'message.tradingTfex'
+					}
+				},
+				{
+					name: "Market Breadth Members",
+					path: "/breadth/members",
+					component: BreadthMembers,
+					meta: {
+						requiresAuth: true,
+						title: 'message.members',
+						breadcrumb: 'message.breadthMembers'
+					}
+				},
+				{
+					name: "Market Breadth Members>MA100",
+					path: "/breadth/membersMa100",
+					component: BreadthMembersMa100,
+					meta: {
+						requiresAuth: true,
+						title: 'message.membersMa100',
+						breadcrumb: 'message.breadthMembersMa100'
+					}
+				},
+				{
+					name: "RRG SET",
+					path: "/rrg/set",
+					component: RrgSet,
+					meta: {
+						requiresAuth: true,
+						title: 'message.set',
+						breadcrumb: 'message.rrgSet'
+					}
+				},
+				{
+					name: "RRG Industry",
+					path: "/rrg/industry",
+					component: RrgIndustry,
+					meta: {
+						requiresAuth: true,
+						title: 'message.industry',
+						breadcrumb: 'message.rrgIndustry'
+					}
+				},
+				{
+					name: "RRG Sector",
+					path: "/rrg/sector",
+					component: RrgSector,
+					meta: {
+						requiresAuth: true,
+						title: 'message.sector',
+						breadcrumb: 'message.rrgSector'
+					}
+				},
 				{
 					name: "Dashboard One",
 					path: '/dashboard/dashboard-v1',
