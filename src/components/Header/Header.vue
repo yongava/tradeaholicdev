@@ -7,14 +7,14 @@
 						<span class="ham-line"></span>
 					</button>
 				</div>
-				<search-form class="v-step-1"></search-form>
+				<!--<search-form class="v-step-1"></search-form>
 				<div class="mobile-search d-none">
 					<b-btn class="mobile-search-btn" variant="white">
 						<span class="zmdi zmdi-search"></span>
 					</b-btn>
-				</div>
+				</div>-->
 			</div>
-			<b-navbar-nav class="navbar-right">
+			<!--<b-navbar-nav class="navbar-right">
 				<b-nav-item class="v-step-2 zoom-out" href="#" @click="toggleScreenFull"><i class="zmdi zmdi-fullscreen"></i>
 				</b-nav-item>
 				<b-nav-item-dropdown right no-caret class="custom-dropdown quick-link-wrap">
@@ -57,10 +57,10 @@
 				<b-nav-item @click="toggleRightSidebar" class="customizer">
 					<i class="zmdi zmdi-tune"></i>
 				</b-nav-item>
-			</b-navbar-nav>
+			</b-navbar-nav>-->
 		</div>
 		<!-- <tour :data="tourData"></tour> -->
-		<right-sidebar :sidebarOpen="rightSidebar"></right-sidebar>
+		<!--<right-sidebar :sidebarOpen="rightSidebar"></right-sidebar>-->
 		<mobile-search-form></mobile-search-form>
 	</header>
 </template>

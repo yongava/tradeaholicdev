@@ -249,7 +249,9 @@
 
 .default{
 	opacity: .9; 
-	background: #2E3344;
+	//background: #2E3344;
+	// change sidebar menu background color to white
+	background: $app_white;
 }
 .orange {
 	opacity: .9; 

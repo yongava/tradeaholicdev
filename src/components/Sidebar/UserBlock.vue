@@ -1,9 +1,9 @@
 <template>
 	<div class="user-section d-flex flex-column align-items-center">
-		<div class="pos-relative d-inline-block">
+		<!--<div class="pos-relative d-inline-block">
 			<img src="/static/img/user-1.jpg" width="60" height="60" alt="user" class="img-fluid rounded-circle mb-10" />
 			<span class="badge badge-success badge-label-sm badge-thumb-top-right badge-pill fa-notify">&nbsp;</span>
-		</div>
+		</div>-->
 		<b-dropdown variant="link" size="md" text="Jan Doe" class="admin-section py-0 ">
 			<b-dropdown-header class="gradient-primary">
 				<span>Jan Doe</span>

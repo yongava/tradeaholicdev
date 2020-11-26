@@ -104,14 +104,18 @@
 					text-overflow: ellipsis;
 					font-size:$sidebar-link-font-size;
 					font-weight: 700;
-					color:$sidebar-link-font-color;
+					// change submenu font color to dark
+					//color: $sidebar-link-font-color;
+					color: $app_font_dark;
 					background: transparent;
 					box-shadow: none;
 					i{
 						font-size:1rem;
 					}
+					// change submenu hover color to same with non-hover
 					&:hover{
-						color:$sidebar-link-active-color;
+						//color:$sidebar-link-active-color;
+						color: $app_font_dark;
 					}
 				}
 				.sub-menu{
@@ -126,7 +130,9 @@
 						}
 						&.router-link-exact-active{
 							.sub-menu-nav-link{
-								color:$sidebar-link-active-color;
+								// change active submenu font color to orange
+								//color:$sidebar-link-active-color;
+								color: $app-orange;
 								font-weight:700;
 								background-color: rgba(255,255,255,0.1);
 							}
@@ -159,8 +165,10 @@
 						transition:transform 0.3s ease;
 					}
 				}
+				// change active menu background color to orange
 				&.active >.nav-link{
-					background: $gradient-primary;
+					background: $app-orange;
+					//background: $gradient-primary;
 					box-shadow: 0 6px 12px 0 rgba(0,0,0,0.24);
 					color:$white;
 					font-weight:700;

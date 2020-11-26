@@ -15,6 +15,13 @@ $gradient-info:                              linear-gradient(180deg, #00ECBC 0%,
 $gradient-skyblue:                           linear-gradient(to bottom, #0000ff 0%, #66ffff 100%) !important;
 $gradient-indigo:                            linear-gradient(to bottom, #0000ff 0%, #ff66ff 100%) !important;
 
+// add customer colors that will be used on site
+$app_white: #ffffff;
+$app_back_gray: #f5f7fa;
+$app_orange: #ef8157;
+$app_font_dark: #66615b;
+$app_light_gray: #ececec;
+
 $base :											   #464d69;
 $font-size-xs:                            0.75rem !default;
 $font-size-md:                            1.25rem !default;

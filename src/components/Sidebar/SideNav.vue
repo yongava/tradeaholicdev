@@ -2,7 +2,7 @@
 	<div class="sidebar-panel-wrap" :style="styles">
 		<div class="sidebar-panel" :class="sidebarSelectedFilter.extraClass">
 			<div class="sidebar-top">
-				<div class="sidebar-logo-wrap d-flex justify-content-center py-20">
+				<div class="sidebar-logo-wrap d-flex justify-content-center pt-40">
 					<app-logo></app-logo>
 				</div>
 				<user-block></user-block>
