@@ -440,4 +440,8 @@
   .header-div {
     text-align: center;
   }
+
+  .text-warning {
+    color: red !important;
+  }
 </style>
