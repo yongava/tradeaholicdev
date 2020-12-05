@@ -1,5 +1,4 @@
 import {Bar} from 'vue-chartjs';
-import ChartConfig from 'Constants/ChartConfig';
 
 export default {
 	extends: Bar,
@@ -39,7 +38,13 @@ export default {
 					// backgroundColor: ChartConfig.color.warning,
 					backgroundColor: '#ef534f',
 					data: [40, 35, 60, 70, 20, 35, 40]
-				}
+				},
+				{
+					label: 'Data One',
+					// backgroundColor: ChartConfig.color.warning,
+					backgroundColor: '#38ada1',
+					data: [56, 12, 90, 33, 88, 23, 40]
+				},
 			]
 		}, this.options)
 	}

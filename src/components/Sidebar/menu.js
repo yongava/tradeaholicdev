@@ -72,7 +72,7 @@ export default {
 				}
 			]
 		},
-		/*{
+		{
 			"menu_title": "message.dashboard",
 			"menu_icon": "zmdi zmdi-view-dashboard",
 			"active": false,
@@ -368,7 +368,7 @@ export default {
 					"menu_title": "message.dropzone"
 				}
 			]
-		}*/
+		}
 	]
 }
 

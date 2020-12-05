@@ -19,7 +19,8 @@ import fullscreen from "vue-fullscreen";
 import Croppa from "vue-croppa";
 import VueTour from 'vue-tour';
 import VueI18n from "vue-i18n";
-import Vuelidate from "vuelidate"
+import Vuelidate from "vuelidate";
+import VueApexCharts from 'vue-apexcharts';
 
 // adminify scripts
 import "./lib/adminifyScripts";
@@ -88,6 +89,8 @@ Vue.use(VueGoogleMaps, {
   }
 });
 Vue.use(GlobalComponents);
+Vue.use(VueApexCharts);
+Vue.component('apexchart', VueApexCharts);
 
 Vue.config.productionTip = false;
 
