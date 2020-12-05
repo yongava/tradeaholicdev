@@ -7,82 +7,82 @@
             <table class="table table-striped custom-table">
               <thead>
               <tr>
-                <th v-for="(header,index) in headersForTransactionList" :key="index">
+                <th v-for="(header,index) in headers" :key="index" :class="header.align">
                   {{header.text}}
                 </th>
               </tr>
               </thead>
               <tbody>
-              <tr v-for="(row,index) in dataForLocal.transactionListDetails" :key="index">
+              <tr v-for="(row,index) in overViewContents" :key="index">
                 <td>{{row.index}}</td>
-                <td>{{row.last}}</td>
-                <td>{{row.chg}}</td>
-                <td>
-                  {{row.proChg}}
+                <td class="text-right">{{numberWithCommas(row.close)}}</td>
+                <td class="text-right" :class="row.change >= 0 ? 'text-success' : 'text-warning'">
+                  {{numberToFixed(row.change) >= 0 ? '+' + numberToFixed(row.change) : numberToFixed(row.change)}}</td>
+                <td class="text-right" :class="row.pct_change >= 0 ? 'text-success' : 'text-warning'">
+                  {{numberToFixed(row.pct_change) >= 0 ? '+' + numberToFixed(row.pct_change) : numberToFixed(row.pct_change)}}
                 </td>
-                <td>{{row.high}}</td>
-                <td>{{row.low}}</td>
-                <td>{{row.volume}}</td>
-                <td>{{row.value}}</td>
+                <td class="text-right">{{numberWithCommas(row.high)}}</td>
+                <td class="text-right">{{numberWithCommas(row.low)}}</td>
+                <td class="text-right">{{numberWithCommas(row.volume)}}</td>
+                <td class="text-right">{{numberWithCommas(row.value)}}</td>
               </tr>
               </tbody>
             </table>
           </div>
         </b-tab>
+
         <b-tab title="Industry">
           <div class="table-responsive">
             <table class="table table-striped custom-table">
               <thead>
               <tr>
-                <th v-for="(header,index) in headersForTransferReport" :key="index">
+                <th v-for="(header,index) in headers" :key="index" :class="header.align">
                   {{header.text}}
                 </th>
               </tr>
               </thead>
               <tbody>
-              <tr v-for="(row,index) in dataForLocal.transferReport" :key="index">
-                <td>{{row.transid}}</td>
-                <td>{{row.date}}</td>
-                <td>{{row.account}}</td>
-                <td>
-                  <b-badge :variant="row.typeColor">{{row.type}}</b-badge>
+              <tr v-for="(row,index) in industryContents" :key="index">
+                <td>{{row.index}}</td>
+                <td class="text-right">{{numberWithCommas(row.close)}}</td>
+                <td class="text-right" :class="row.change >= 0 ? 'text-success' : 'text-warning'">
+                  {{numberToFixed(row.change) >= 0 ? '+' + numberToFixed(row.change) : numberToFixed(row.change)}}</td>
+                <td class="text-right" :class="row.pct_change >= 0 ? 'text-success' : 'text-warning'">
+                  {{numberToFixed(row.pct_change) >= 0 ? '+' + numberToFixed(row.pct_change) : numberToFixed(row.pct_change)}}
                 </td>
-                <td>{{row.amount}}</td>
-                <td>{{row.balance}}</td>
-                <td>
-                  <b-badge :variant="row.statusColor">
-                    {{row.status}}
-                  </b-badge>
-                </td>
+                <td class="text-right">{{numberWithCommas(row.high)}}</td>
+                <td class="text-right">{{numberWithCommas(row.low)}}</td>
+                <td class="text-right">{{numberWithCommas(row.volume)}}</td>
+                <td class="text-right">{{numberWithCommas(row.value)}}</td>
               </tr>
               </tbody>
             </table>
           </div>
         </b-tab>
-        <b-tab title="Sector">
+
+        <b-tab title="Industry">
           <div class="table-responsive">
             <table class="table table-striped custom-table">
               <thead>
               <tr>
-                <th v-for="(header,index) in headersForExpenseCategory" :key="index">
+                <th v-for="(header,index) in headers" :key="index" :class="header.align">
                   {{header.text}}
                 </th>
               </tr>
               </thead>
               <tbody>
-              <tr v-for="(row,index) in dataForLocal.expenseCategoryDetails" :key="index">
-                <td>{{row.itmNo}}</td>
-                <td>{{row.date}}</td>
-                <td>
-                  <b-badge :variant="row.typeColor">{{row.type}}</b-badge>
+              <tr v-for="(row,index) in sectorContents" :key="index">
+                <td>{{row.index}}</td>
+                <td class="text-right">{{numberWithCommas(row.close)}}</td>
+                <td class="text-right" :class="row.change >= 0 ? 'text-success' : 'text-warning'">
+                  {{numberToFixed(row.change) >= 0 ? '+' + numberToFixed(row.change) : numberToFixed(row.change)}}</td>
+                <td class="text-right" :class="row.pct_change >= 0 ? 'text-success' : 'text-warning'">
+                  {{numberToFixed(row.pct_change) >= 0 ? '+' + numberToFixed(row.pct_change) : numberToFixed(row.pct_change)}}
                 </td>
-                <td>{{row.description}}</td>
-                <td>{{row.amount}}</td>
-                <td>
-                  <b-badge :variant="row.statusColor">
-                    {{row.status}}
-                  </b-badge>
-                </td>
+                <td class="text-right">{{numberWithCommas(row.high)}}</td>
+                <td class="text-right">{{numberWithCommas(row.low)}}</td>
+                <td class="text-right">{{numberWithCommas(row.volume)}}</td>
+                <td class="text-right">{{numberWithCommas(row.value)}}</td>
               </tr>
               </tbody>
             </table>
@@ -154,9 +154,9 @@
                 </div>
 
                 <div class="col-12 border-bottom py-2 header-div">
-                <h5>
-                  Index Performance
-                </h5>
+                  <h5>
+                    Index Performance
+                  </h5>
                 </div>
 
                 <div class="col-12 border-bottom py-2 info-div">
@@ -254,9 +254,9 @@
                 </div>
 
                 <div class="col-12 border-bottom py-2 header-div">
-                <h5>
-                  Index Performance
-                </h5>
+                  <h5>
+                    Index Performance
+                  </h5>
                 </div>
 
                 <div class="col-12 border-bottom py-2 info-div">
@@ -298,126 +298,122 @@
 </template>
 
 <script>
-	import {dataForLocal} from "Assets/data/dataForLocal.js";
+	import axios from 'axios'
 
 	export default {
+		mounted() {
+			this.loadContent();
+		},
 		data() {
 			return {
-				dataForLocal,
-				headersForTransactionList: [
+				headers: [
 					{
 						text: "Index",
 						sortable: false,
-						value: "transaction Id"
+						value: "index",
+						align: "text-left",
 					},
 					{
 						text: "Last",
 						sortable: false,
-						value: "date"
+						value: "close",
+						align: "text-right",
 					},
 					{
 						text: "CHG",
 						sortable: false,
-						value: "account"
+						value: "change",
+						align: "text-right",
 					},
 					{
 						text: "%CHG",
 						sortable: false,
-						value: "type"
+						value: "pct_change",
+						align: "text-right",
 					},
 					{
 						text: "High",
 						sortable: false,
-						value: "amount"
+						value: "high",
+						align: "text-right",
 					},
 					{
 						text: "Low",
 						sortable: false,
-						value: "debit"
+						value: "low",
+						align: "text-right",
 					},
 					{
 						text: "Volume",
 						sortable: false,
-						value: "credit"
+						value: "volume",
+						align: "text-right",
 					},
 					{
 						text: "Value",
 						sortable: false,
-						value: "balance"
+						value: "value",
+						align: "text-right",
 					}
 				],
-
-				headersForTransferReport: [
-					{
-						text: "Transfer Id",
-						sortable: false,
-						value: "transfer Id"
-					},
-					{
-						text: "Date",
-						sortable: false,
-						value: "date"
-					},
-					{
-						text: "Account",
-						sortable: false,
-						value: "account"
-					},
-					{
-						text: "Type",
-						sortable: false,
-						value: "type"
-					},
-					{
-						text: "Amount",
-						sortable: false,
-						value: "amount"
-					},
-					{
-						text: "Balance",
-						sortable: false,
-						value: "balance"
-					},
-					{
-						text: "Status",
-						sortable: false,
-						value: "status"
-					}
+				overViewIndices: [
+					'SET', 'SET50', 'SET100', 'sSET', 'SETCLMV', 'SETHD', 'SETTHSI', 'SETWB', 'MAI'
 				],
-
-				headersForExpenseCategory: [
-					{
-						text: "Item No",
-						sortable: false,
-						value: "item No"
-					},
-					{
-						text: "Date",
-						sortable: false,
-						value: "date"
-					},
-					{
-						text: "Type",
-						sortable: false,
-						value: "type"
-					},
-					{
-						text: "Description",
-						sortable: false,
-						value: "description"
-					},
-					{
-						text: "Amount",
-						sortable: false,
-						value: "Amount"
-					},
-					{
-						text: "Status",
-						sortable: false,
-						value: "info"
-					}
-				]
+        industryIndices: [
+					'.AGRO', '.CONSUMP', '.FINCIAL', '.INDUS', '.PROPCON', '.RESOURC', '.SERVICE', '.TECH'
+        ],
+        sectorIndices: [
+					'.AGRI', '.FOOD', '.FASHION', '.HOME', '.PERSON', '.BANK', '.FIN', '.INSUR', '.AUTO',
+          '.IMM', '.PAPER', '.PETRO', '.PKG', '.STEEL', '.CONMAT', '.CONS', '.PROP', '.ENERG',
+          '.MINE', '.COMM', '.HELTH', '.MEDIA', '.PROF', '.TOURISM', '.TRANS', '.ETRON','.ICT'
+        ],
+				overViewContents: [],
+        industryContents: [],
+        sectorContents: [],
 			};
+		},
+		methods: {
+			async loadContent() {
+				const apiUrl = 'https://mka-api.alpha.lab.ai/prices/pct_change/';
+				this.overViewContents = [];
+				for (let i = 0; i < this.overViewIndices.length; i++) {
+					axios.get(apiUrl + this.overViewIndices[i])
+						.then(response => {
+
+							this.overViewContents.push({...response.data, index: this.overViewIndices[i]});
+						})
+						.catch(err => {
+							console.log(err);
+						});
+				}
+
+				for (let i = 0; i < this.industryIndices.length; i++) {
+					axios.get(apiUrl + this.industryIndices[i])
+						.then(response => {
+
+							this.industryContents.push({...response.data, index: this.industryIndices[i]});
+						})
+						.catch(err => {
+							console.log(err);
+						});
+				}
+
+				for (let i = 0; i < this.sectorIndices.length; i++) {
+					axios.get(apiUrl + this.sectorIndices[i])
+						.then(response => {
+							this.sectorContents.push({...response.data, index: this.sectorIndices[i]});
+						})
+						.catch(err => {
+							console.log(err);
+						});
+				}
+			},
+			numberWithCommas(x) {
+				return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			},
+      numberToFixed(num) {
+				return num.toFixed(2);
+      },
 		}
 	};
 </script>
