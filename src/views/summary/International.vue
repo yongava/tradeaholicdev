@@ -61,14 +61,14 @@
 									"s": "INDEX:NKY",
 									"d": "Nikkei 225"
 								},
-								{
-									"s": "TVC:HSI",
-									"d": "Hang Seng"
-								},
-								{
-									"s": "SET:SET",
-									"d": "SET"
-								}
+								// {
+								// 	"s": "TVC:HSI",
+								// 	"d": "Hang Seng"
+								// },
+								// {
+								// 	"s": "SET:SET",
+								// 	"d": "SET"
+								// }
 							],
 							"originalTitle": "Indices"
 						},
