@@ -64,7 +64,7 @@
           </div>
         </b-tab>
 
-        <b-tab title="Industry">
+        <b-tab title="Sector">
           <div class="table-responsive">
             <table class="table table-striped custom-table">
               <thead>
