@@ -17,9 +17,11 @@
                 <td>{{row.index}}</td>
                 <td class="text-right">{{numberWithCommas(row.close)}}</td>
                 <td class="text-right" :class="row.change >= 0 ? 'text-success' : 'text-warning'">
-                  {{numberToFixed(row.change) >= 0 ? '+' + numberToFixed(row.change) : numberToFixed(row.change)}}</td>
+                  {{numberToFixed(row.change) >= 0 ? '+' + numberToFixed(row.change) : numberToFixed(row.change)}}
+                </td>
                 <td class="text-right" :class="row.pct_change >= 0 ? 'text-success' : 'text-warning'">
-                  {{numberToFixed(row.pct_change) >= 0 ? '+' + numberToFixed(row.pct_change) : numberToFixed(row.pct_change)}}
+                  {{numberToFixed(row.pct_change) >= 0 ? '+' + numberToFixed(row.pct_change) :
+                  numberToFixed(row.pct_change)}}
                 </td>
                 <td class="text-right">{{numberWithCommas(row.high)}}</td>
                 <td class="text-right">{{numberWithCommas(row.low)}}</td>
@@ -46,9 +48,11 @@
                 <td>{{row.index}}</td>
                 <td class="text-right">{{numberWithCommas(row.close)}}</td>
                 <td class="text-right" :class="row.change >= 0 ? 'text-success' : 'text-warning'">
-                  {{numberToFixed(row.change) >= 0 ? '+' + numberToFixed(row.change) : numberToFixed(row.change)}}</td>
+                  {{numberToFixed(row.change) >= 0 ? '+' + numberToFixed(row.change) : numberToFixed(row.change)}}
+                </td>
                 <td class="text-right" :class="row.pct_change >= 0 ? 'text-success' : 'text-warning'">
-                  {{numberToFixed(row.pct_change) >= 0 ? '+' + numberToFixed(row.pct_change) : numberToFixed(row.pct_change)}}
+                  {{numberToFixed(row.pct_change) >= 0 ? '+' + numberToFixed(row.pct_change) :
+                  numberToFixed(row.pct_change)}}
                 </td>
                 <td class="text-right">{{numberWithCommas(row.high)}}</td>
                 <td class="text-right">{{numberWithCommas(row.low)}}</td>
@@ -75,9 +79,11 @@
                 <td>{{row.index}}</td>
                 <td class="text-right">{{numberWithCommas(row.close)}}</td>
                 <td class="text-right" :class="row.change >= 0 ? 'text-success' : 'text-warning'">
-                  {{numberToFixed(row.change) >= 0 ? '+' + numberToFixed(row.change) : numberToFixed(row.change)}}</td>
+                  {{numberToFixed(row.change) >= 0 ? '+' + numberToFixed(row.change) : numberToFixed(row.change)}}
+                </td>
                 <td class="text-right" :class="row.pct_change >= 0 ? 'text-success' : 'text-warning'">
-                  {{numberToFixed(row.pct_change) >= 0 ? '+' + numberToFixed(row.pct_change) : numberToFixed(row.pct_change)}}
+                  {{numberToFixed(row.pct_change) >= 0 ? '+' + numberToFixed(row.pct_change) :
+                  numberToFixed(row.pct_change)}}
                 </td>
                 <td class="text-right">{{numberWithCommas(row.high)}}</td>
                 <td class="text-right">{{numberWithCommas(row.low)}}</td>
@@ -109,7 +115,7 @@
                 </span>
 
                   <span>
-                  15,854,138.74
+                  {{statisticsData && statisticsData.set && statisticsData.set['MarketCap.(M.Baht)']}}
                 </span>
                 </div>
 
@@ -119,7 +125,7 @@
                 </span>
 
                   <span>
-                  200.86
+                  {{statisticsData && statisticsData.set && statisticsData.set['TurnoverRatio(YTD)(%)']}}
                 </span>
                 </div>
 
@@ -129,7 +135,7 @@
                 </span>
 
                   <span>
-                  28.49
+                  {{statisticsData && statisticsData.set && statisticsData.set['P/E(times)']}}
                 </span>
                 </div>
 
@@ -139,7 +145,7 @@
                 </span>
 
                   <span>
-                  1.62
+                  {{statisticsData && statisticsData.set && statisticsData.set['P/BV(times)']}}
                 </span>
                 </div>
 
@@ -149,7 +155,7 @@
                 </span>
 
                   <span>
-                  3.37
+                  {{statisticsData && statisticsData.set && statisticsData.set['MarketYield(%)']}}
                 </span>
                 </div>
 
@@ -164,8 +170,9 @@
                   % Change Last 3 Months
                 </span>
 
-                  <span class="text-success">
-                  +7.76%
+                  <span :class="checkIfPlus(statisticsData.set['%ChangeLast3Months']) ? 'text-success' : 'text-warning'"
+                        v-if="statisticsData">
+                  {{statisticsData && statisticsData.set && statisticsData.set['%ChangeLast3Months']}}
                 </span>
                 </div>
 
@@ -174,8 +181,9 @@
                   % Change Last 6 Months
                 </span>
 
-                  <span class="text-success">
-                  +3.19%
+                  <span :class="checkIfPlus(statisticsData.set['%ChangeLast6Months']) ? 'text-success' : 'text-warning'"
+                        v-if="statisticsData">
+                  {{statisticsData && statisticsData.set && statisticsData.set['%ChangeLast6Months']}}
                 </span>
                 </div>
 
@@ -184,8 +192,9 @@
                   % Change YTD (Year to Date)
                 </span>
 
-                  <span class="text-warning">
-                  -10.25%
+                  <span :class="checkIfPlus(statisticsData.set['%ChangeYTD(YeartoDate)']) ? 'text-success' : 'text-warning'"
+                        v-if="statisticsData">
+                  {{statisticsData && statisticsData.set && statisticsData.set['%ChangeYTD(YeartoDate)']}}
                 </span>
                 </div>
               </div>
@@ -209,7 +218,7 @@
                 </span>
 
                   <span>
-                  240,951.33
+                  {{statisticsData && statisticsData.mai && statisticsData.mai['MarketCap.(M.Baht)']}}
                 </span>
                 </div>
 
@@ -219,7 +228,7 @@
                 </span>
 
                   <span>
-                  53.90
+                  {{statisticsData && statisticsData.mai && statisticsData.mai['TurnoverRatio(YTD)(%)']}}
                 </span>
                 </div>
 
@@ -229,7 +238,7 @@
                 </span>
 
                   <span>
-                  67.36
+                  {{statisticsData && statisticsData.mai && statisticsData.mai['P/E(times)']}}
                 </span>
                 </div>
 
@@ -239,7 +248,7 @@
                 </span>
 
                   <span>
-                  1.73
+                  {{statisticsData && statisticsData.mai && statisticsData.mai['P/BV(times)']}}
                 </span>
                 </div>
 
@@ -249,7 +258,7 @@
                 </span>
 
                   <span>
-                  2.50
+                  {{statisticsData && statisticsData.mai && statisticsData.mai['MarketYield(%)']}}
                 </span>
                 </div>
 
@@ -264,8 +273,9 @@
                   % Change Last 3 Months
                 </span>
 
-                  <span class="text-success">
-                  +4.93%
+                  <span :class="checkIfPlus(statisticsData.mai['%ChangeLast3Months']) ? 'text-success' : 'text-warning'"
+                        v-if="statisticsData">
+                  {{statisticsData && statisticsData.mai && statisticsData.mai['%ChangeLast3Months']}}
                 </span>
                 </div>
 
@@ -274,8 +284,9 @@
                   % Change Last 6 Months
                 </span>
 
-                  <span class="text-success">
-                  +13.49%
+                  <span :class="checkIfPlus(statisticsData.mai['%ChangeLast6Months']) ? 'text-success' : 'text-warning'"
+                        v-if="statisticsData">
+                  {{statisticsData && statisticsData.mai && statisticsData.mai['%ChangeLast6Months']}}
                 </span>
                 </div>
 
@@ -284,8 +295,10 @@
                   % Change YTD (Year to Date)
                 </span>
 
-                  <span class="text-success">
-                  +6.00%
+                  <span
+                    :class="checkIfPlus(statisticsData.mai['%ChangeYTD(YeartoDate)']) ? 'text-success' : 'text-warning'"
+                    v-if="statisticsData">
+                  {{statisticsData && statisticsData.mai && statisticsData.mai['%ChangeYTD(YeartoDate)']}}
                 </span>
                 </div>
               </div>
@@ -303,6 +316,7 @@
 	export default {
 		mounted() {
 			this.loadContent();
+			this.loadStatistics();
 		},
 		data() {
 			return {
@@ -359,17 +373,18 @@
 				overViewIndices: [
 					'SET', 'SET50', 'SET100', 'sSET', 'SETCLMV', 'SETHD', 'SETTHSI', 'SETWB', 'MAI'
 				],
-        industryIndices: [
+				industryIndices: [
 					'.AGRO', '.CONSUMP', '.FINCIAL', '.INDUS', '.PROPCON', '.RESOURC', '.SERVICE', '.TECH'
-        ],
-        sectorIndices: [
+				],
+				sectorIndices: [
 					'.AGRI', '.FOOD', '.FASHION', '.HOME', '.PERSON', '.BANK', '.FIN', '.INSUR', '.AUTO',
-          '.IMM', '.PAPER', '.PETRO', '.PKG', '.STEEL', '.CONMAT', '.CONS', '.PROP', '.ENERG',
-          '.MINE', '.COMM', '.HELTH', '.MEDIA', '.PROF', '.TOURISM', '.TRANS', '.ETRON','.ICT'
-        ],
+					'.IMM', '.PAPER', '.PETRO', '.PKG', '.STEEL', '.CONMAT', '.CONS', '.PROP', '.ENERG',
+					'.MINE', '.COMM', '.HELTH', '.MEDIA', '.PROF', '.TOURISM', '.TRANS', '.ETRON', '.ICT'
+				],
 				overViewContents: [],
-        industryContents: [],
-        sectorContents: [],
+				industryContents: [],
+				sectorContents: [],
+				statisticsData: null,
 			};
 		},
 		methods: {
@@ -408,12 +423,23 @@
 						});
 				}
 			},
+			async loadStatistics() {
+				try {
+					const ret = await axios.get('http://alpha.southeastasia.cloudapp.azure.com:8083/setmaiinfo');
+					this.statisticsData = ret.data;
+				} catch (e) {
+					console.log(e);
+				}
+			},
 			numberWithCommas(x) {
 				return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 			},
-      numberToFixed(num) {
+			numberToFixed(num) {
 				return num.toFixed(2);
-      },
+			},
+			checkIfPlus(str) {
+				return (str && str.charAt(0) === '+');
+			}
 		}
 	};
 </script>
