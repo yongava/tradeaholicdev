@@ -425,7 +425,7 @@
 			},
 			async loadStatistics() {
 				try {
-					const ret = await axios.get('https://dbs-funda.alpha.lab.ai/setmaiinfo');
+					const ret = await axios.get('https://yong.alpha.lab.ai/setmaiinfo');
 					this.statisticsData = ret.data;
 				} catch (e) {
 					console.log(e);
