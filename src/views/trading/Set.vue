@@ -167,7 +167,12 @@
 
     <app-card customClasses="grid-b-space tabs-table-wrap">
       <b-tabs>
-        <b-tab v-for="(tab, index) of tableTabs" :active="index === 0" :title="tab.title" :key="index + '-' + tableCount + 'table-tab'">
+        <b-tab
+          v-for="(tab, index) of tableTabs"
+          :active="index === 0"
+          :title="tab.title"
+          :key="index + '-' + tableCount + 'table-tab'"
+        >
           <div class="table-responsive">
             <table class="table table-striped custom-table">
               <thead>
@@ -190,17 +195,24 @@
               <tr v-for="(row, index) in tableRowNames">
                 <td>{{row}}</td>
                 <td class="text-right">
-                  {{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][index][0])}}
+                  {{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value]['rows'][index][0])}}
                 </td>
                 <td class="text-right">
-                  {{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][index][1])}}
+                  {{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value]['rows'][index][1])}}
                 </td>
-                <td class="text-right" :class="tableData && tableData[tab.value] && tableData[tab.value][index][2] >= 0 ? 'text-success': 'text-warning'">
-                  {{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][index][2])}}
+                <td class="text-right"
+                    :class="tableData && tableData[tab.value] && tableData[tab.value]['rows'][index][2] >= 0 ? 'text-success': 'text-warning'">
+                  {{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value]['rows'][index][2])}}
                 </td>
               </tr>
               </tbody>
             </table>
+          </div>
+          <div class="pl-3 latest-date">
+            {{
+            (tableData && tableData[tab.value] && tableData[tab.value]['date']) ?
+            'Updated ' + latestDateFormat(tableData && tableData[tab.value] && tableData[tab.value]['date']) : ''
+            }}
           </div>
         </b-tab>
       </b-tabs>
@@ -232,6 +244,8 @@
 		},
 		data() {
 			return {
+				apiUrl: 'https://yong.alpha.lab.ai/tradesum_set',
+				tableApiUrl: 'https://yong.alpha.lab.ai/tradesum_set/recent/',
 				options: {
 					candlestick: {
 						colors: {
@@ -307,15 +321,15 @@
 						value: 'YTD',
 					}
 				],
-        tableRowNames: [
-        	'Local Institutions',
-          'Foreign Investors',
-          'Proprietary Trading',
-          'Local Individuals'
-        ],
+				tableRowNames: [
+					'Local Institutions',
+					'Foreign Investors',
+					'Proprietary Trading',
+					'Local Individuals'
+				],
 				count: 0,
 				middleCount: 0,
-        tableCount: 0,
+				tableCount: 0,
 			}
 		},
 		methods: {
@@ -334,8 +348,7 @@
 					data: [],
 				};
 
-				const apiUrl = 'https://yong.alpha.lab.ai/tradesum_set';
-				const res = await axios.get(apiUrl);
+				const res = await axios.get(this.apiUrl);
 				res &&
 				res.data &&
 				res.data.sort((a, b) => (a.date > b.date ? 1 : -1))
@@ -376,35 +389,37 @@
 				this.middleCount++;
 			},
 			async loadTableData() {
-				const apiUrl = 'https://yong.alpha.lab.ai/tradesum_set/recent/';
 				this.tableData = {};
 
 				for (let i = 0; i < this.tableTabs.length; i++) {
 					try {
-						const res = await axios.get(apiUrl + this.tableTabs[i].value);
+						const res = await axios.get(this.tableApiUrl + this.tableTabs[i].value);
 						if (res.data && res.data[0]) {
-							this.tableData[this.tableTabs[i].value] = [
-								[
-									res.data[0]['FundValBuySum'],
-									res.data[0]['FundValSellSum'],
-									res.data[0]['FundValNetSum'],
-								],
-								[
-									res.data[0]['ForeignValBuySum'],
-									res.data[0]['ForeignValSellSum'],
-									res.data[0]['ForeignValNetSum'],
-								],
-								[
-									res.data[0]['TradingValBuySum'],
-									res.data[0]['TradingValSellSum'],
-									res.data[0]['TradingValNetSum'],
-								],
-								[
-									res.data[0]['CustomerValBuySum'],
-									res.data[0]['CustomerValSellSum'],
-									res.data[0]['CustomerValNetSum'],
+							this.tableData[this.tableTabs[i].value] = {
+								'date': res.data[0]['date'],
+								'rows': [
+									[
+										res.data[0]['FundValBuySum'],
+										res.data[0]['FundValSellSum'],
+										res.data[0]['FundValNetSum'],
+									],
+									[
+										res.data[0]['ForeignValBuySum'],
+										res.data[0]['ForeignValSellSum'],
+										res.data[0]['ForeignValNetSum'],
+									],
+									[
+										res.data[0]['TradingValBuySum'],
+										res.data[0]['TradingValSellSum'],
+										res.data[0]['TradingValNetSum'],
+									],
+									[
+										res.data[0]['CustomerValBuySum'],
+										res.data[0]['CustomerValSellSum'],
+										res.data[0]['CustomerValNetSum'],
+									]
 								]
-							]
+							};
 						}
 					} catch (e) {
 						console.log(e);
@@ -416,6 +431,9 @@
 			numberWithCommas(x) {
 				return numberWithCommas(x);
 			},
+      latestDateFormat(date) {
+				return moment(date).format('D MMM YYYY');
+      }
 		}
 	}
 </script>
@@ -432,5 +450,9 @@
 
   .text-warning {
     color: red !important;
+  }
+
+  .latest-date {
+    font-size: 0.875rem;
   }
 </style>
