@@ -188,37 +188,37 @@
               <tbody>
               <tr>
                 <td>Local Institutions</td>
-                <td class="text-right">{{numberWithCommas(tableData[tab.value][0][0])}}</td>
-                <td class="text-right">{{numberWithCommas(tableData[tab.value][0][1])}}</td>
-                <td class="text-right" :class="tableData[tab.value][0][2] >= 0 ? 'text-success': 'text-warning'">
-                  {{numberWithCommas(tableData[tab.value][0][2])}}
+                <td class="text-right">{{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][0][0])}}</td>
+                <td class="text-right">{{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][0][1])}}</td>
+                <td class="text-right" :class="tableData && tableData[tab.value] && tableData[tab.value][0][2] >= 0 ? 'text-success': 'text-warning'">
+                  {{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][0][2])}}
                 </td>
               </tr>
 
               <tr>
                 <td>Foreign Investors</td>
-                <td class="text-right">{{numberWithCommas(tableData[tab.value][1][0])}}</td>
-                <td class="text-right">{{numberWithCommas(tableData[tab.value][1][1])}}</td>
-                <td class="text-right" :class="tableData[tab.value][1][2] >= 0 ? 'text-success': 'text-warning'">
-                  {{numberWithCommas(tableData[tab.value][1][2])}}
+                <td class="text-right">{{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][1][0])}}</td>
+                <td class="text-right">{{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][1][1])}}</td>
+                <td class="text-right" :class="tableData && tableData[tab.value] && tableData[tab.value][1][2] >= 0 ? 'text-success': 'text-warning'">
+                  {{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][1][2])}}
                 </td>
               </tr>
 
               <tr>
                 <td>Proprietary Trading</td>
-                <td class="text-right">{{numberWithCommas(tableData[tab.value][2][0])}}</td>
-                <td class="text-right">{{numberWithCommas(tableData[tab.value][2][1])}}</td>
-                <td class="text-right" :class="tableData[tab.value][2][2] >= 0 ? 'text-success': 'text-warning'">
-                  {{numberWithCommas(tableData[tab.value][2][2])}}
+                <td class="text-right">{{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][2][0])}}</td>
+                <td class="text-right">{{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][2][1])}}</td>
+                <td class="text-right" :class="tableData && tableData[tab.value] && tableData[tab.value][2][2] >= 0 ? 'text-success': 'text-warning'">
+                  {{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][2][2])}}
                 </td>
               </tr>
 
               <tr>
                 <td>Local Individuals</td>
-                <td class="text-right">{{numberWithCommas(tableData[tab.value][3][0])}}</td>
-                <td class="text-right">{{numberWithCommas(tableData[tab.value][3][1])}}</td>
-                <td class="text-right" :class="tableData[tab.value][3][2] >= 0 ? 'text-success': 'text-warning'">
-                  {{numberWithCommas(tableData[tab.value][3][2])}}
+                <td class="text-right">{{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][3][0])}}</td>
+                <td class="text-right">{{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][3][1])}}</td>
+                <td class="text-right" :class="tableData && tableData[tab.value] && tableData[tab.value][3][2] >= 0 ? 'text-success': 'text-warning'">
+                  {{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][3][2])}}
                 </td>
               </tr>
               </tbody>
