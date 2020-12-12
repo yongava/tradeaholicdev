@@ -10,15 +10,15 @@
         :height="200"
         :data="data"
         :labels="labels"
+        :colors="barColors"
       ></bar-chart>
     </div>
 
     <div>
       <line-chart
         :key="count + '-second-' + individual + '-' + title"
-        border="#ef534f"
+        :border="border"
         :height="200"
-        :background="'#ef534f'"
         :data="sumData"
         :labels="labels"
         :x-show="true"
@@ -33,7 +33,7 @@
 
   export default {
   	name: 'SetMiddle',
-    props: ['title', 'data', 'sumData', 'labels', 'count', 'individual'],
+    props: ['title', 'data', 'sumData', 'labels', 'count', 'individual', 'barColors', 'border'],
     components: {
   		BarChart,
 			LineChart,

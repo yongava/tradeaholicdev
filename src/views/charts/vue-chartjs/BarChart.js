@@ -30,7 +30,7 @@ export default {
 			}
 		}
 	},
-	props: ['data', 'labels'],
+	props: ['data', 'labels', 'colors'],
 	mounted() {
 		this.renderChart({
 			labels: this.labels || ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -38,7 +38,7 @@ export default {
 				{
 					label: 'Data One',
 					// backgroundColor: ChartConfig.color.warning,
-					backgroundColor: '#ef534f',
+					backgroundColor: this.colors || '#ef534f',
 					data: this.data || [40, 35, 60, 70, 20, 35, 40]
 				}
 			]

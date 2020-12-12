@@ -10,7 +10,7 @@ export default {
 			gradient2: null
 		}
 	},
-	props: ['border', 'labels', 'data', 'background', 'xShow'],
+	props: ['border', 'labels', 'data', 'xShow'],
 	mounted() {
 		this.gradient = this.$refs.canvas.getContext('2d').createLinearGradient(500, 0, 100, 0)
 		this.gradient2 = this.$refs.canvas.getContext('2d').createLinearGradient(500, 0, 100, 0)
@@ -32,7 +32,7 @@ export default {
 							autoSkip: true
 						}
 					}
-				]
+				],
 		}
 
 		this.renderChart({
@@ -53,9 +53,9 @@ export default {
 				// borderWidth: 4,
 				pointRadius: 1,
 				borderWidth: 2,
-				backgroundColor: this.background ? this.background : 'transparent',
+				backgroundColor: 'transparent',
 				borderColor: this.border,
-				data: this.data || [100, 120, 150, 170, 180, 170, 160, 190]
+				data: this.data || [100, 120, 150, 170, 180, 170, 160, 190],
 			}]
 		}, {responsive: true, maintainAspectRatio: false, legend: {position: 'top', display: false}, scales})
 	}

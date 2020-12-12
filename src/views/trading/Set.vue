@@ -1,10 +1,10 @@
 <template>
   <div>
     <app-card customClasses="grid-b-space tabs-table-wrap">
+
       <div class="text-center">
         <h5>SET</h5>
       </div>
-
       <div>
         <apexchart
           width="100%"
@@ -15,10 +15,10 @@
           :key="'set-' + count"
         ></apexchart>
       </div>
+
       <div class="text-center mb-3">
         <h5>Local Institutions</h5>
       </div>
-
       <div>
         <line-chart
           border="#ef534f"
@@ -28,10 +28,10 @@
           :data="local['data']"
         ></line-chart>
       </div>
+
       <div class="text-center my-3">
         <h5>Foreign Investors</h5>
       </div>
-
       <div>
         <line-chart
           border="#38ada1"
@@ -41,10 +41,10 @@
           :data="foreign['data']"
         ></line-chart>
       </div>
+
       <div class="text-center my-3">
         <h5>Local Individuals</h5>
       </div>
-
       <div>
         <line-chart
           border="#797b86"
@@ -52,11 +52,21 @@
           :key="'individual-' + count"
           :labels="individual['labels']"
           :data="individual['data']"
-          :x-show="true"
         ></line-chart>
       </div>
+
       <div class="text-center my-3">
-        <h5>Institution Trading Value</h5>
+        <h5>Proprietary Trading</h5>
+      </div>
+      <div>
+        <line-chart
+          border="blue"
+          :height="200"
+          :key="'proprietary-' + count"
+          :labels="proprietary['labels']"
+          :data="proprietary['data']"
+          :x-show="true"
+        ></line-chart>
       </div>
 
     </app-card>
@@ -71,6 +81,8 @@
                 :data="middleInstitution['data']"
                 :sumData="middleInstitution['sumData']"
                 :labels="middleInstitution['labels']"
+                :barColors="middleInstitution['barColors']"
+                :border="middleInstitution['border']"
                 :count="middleCount"
                 individual="0"
               ></set-middle>
@@ -82,6 +94,8 @@
                 :data="middleForeign['data']"
                 :sumData="middleForeign['sumData']"
                 :labels="middleForeign['labels']"
+                :barColors="middleForeign['barColors']"
+                :border="middleForeign['border']"
                 :count="middleCount"
                 individual="0"
               ></set-middle>
@@ -93,6 +107,8 @@
                 :data="middleIndividual['data']"
                 :sumData="middleIndividual['sumData']"
                 :labels="middleIndividual['labels']"
+                :barColors="middleIndividual['barColors']"
+                :border="middleIndividual['border']"
                 :count="middleCount"
                 individual="0"
               ></set-middle>
@@ -104,6 +120,8 @@
                 :data="middleProprietary['data']"
                 :sumData="middleProprietary['sumData']"
                 :labels="middleProprietary['labels']"
+                :barColors="middleProprietary['barColors']"
+                :border="middleProprietary['border']"
                 :count="middleCount"
                 individual="0"
               ></set-middle>
@@ -118,6 +136,8 @@
               :data="middleInstitution['data']"
               :sumData="middleInstitution['sumData']"
               :labels="middleInstitution['labels']"
+              :barColors="middleInstitution['barColors']"
+              :border="middleInstitution['border']"
               :count="middleCount"
               :individual="1"
             ></set-middle>
@@ -131,6 +151,8 @@
               :data="middleForeign['data']"
               :sumData="middleForeign['sumData']"
               :labels="middleForeign['labels']"
+              :barColors="middleForeign['barColors']"
+              :border="middleForeign['border']"
               :count="middleCount"
               :individual="1"
             ></set-middle>
@@ -144,6 +166,8 @@
               :data="middleProprietary['data']"
               :sumData="middleProprietary['sumData']"
               :labels="middleProprietary['labels']"
+              :barColors="middleProprietary['barColors']"
+              :border="middleProprietary['border']"
               :count="middleCount"
               :individual="1"
             ></set-middle>
@@ -157,6 +181,8 @@
               :data="middleIndividual['data']"
               :sumData="middleIndividual['sumData']"
               :labels="middleIndividual['labels']"
+              :barColors="middleIndividual['barColors']"
+              :border="middleIndividual['border']"
               :count="middleCount"
               :individual="1"
             ></set-middle>
@@ -168,10 +194,10 @@
     <app-card customClasses="grid-b-space tabs-table-wrap">
       <b-tabs>
         <b-tab
-          v-for="(tab, index) of tableTabs"
-          :active="index === 0"
+          v-for="(tab, key) of tableTabs"
+          :active="key === 0"
           :title="tab.title"
-          :key="index + '-' + tableCount + 'table-tab'"
+          :key="key + '-' + tableCount + 'table-tab'"
         >
           <div class="table-responsive">
             <table class="table table-striped custom-table">
@@ -192,7 +218,7 @@
               </tr>
               </thead>
               <tbody>
-              <tr v-for="(row, index) in tableRowNames">
+              <tr v-for="(row, index) in tableRowNames" :key="'tr-' + index + '-' + key">
                 <td>{{row}}</td>
                 <td class="text-right">
                   {{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value]['rows'][index][0])}}
@@ -282,25 +308,37 @@
 					labels: [],
 					data: [],
 				},
+        proprietary: {
+					labels: [],
+					data: [],
+				},
 				middleInstitution: {
 					labels: [],
 					data: [],
-					sumData: [],
+          sumData: [],
+          barColors: [],
+          border: [],
 				},
 				middleForeign: {
 					labels: [],
 					data: [],
-					sumData: [],
+          sumData: [],
+          barColors: [],
+          border: [],
 				},
 				middleIndividual: {
 					labels: [],
 					data: [],
-					sumData: [],
+          sumData: [],
+          barColors: [],
+          border: [],
 				},
 				middleProprietary: {
 					labels: [],
 					data: [],
-					sumData: [],
+          sumData: [],
+          barColors: [],
+          border: [],
 				},
 				tableData: {},
 				tableTabs: [
@@ -351,7 +389,8 @@
 				const res = await axios.get(this.apiUrl);
 				res &&
 				res.data &&
-				res.data.sort((a, b) => (a.date > b.date ? 1 : -1))
+        res.data.sort((a, b) => (a.date > b.date ? 1 : -1));
+        
 				res.data.map(entity => {
 					this.series[0].data.push({
 						x: entity.date,
@@ -367,26 +406,37 @@
 					this.foreign['data'].push(entity.ForeignValNetSum);
 
 					this.individual['labels'].push(dateStr);
-					this.individual['data'].push(entity.CustomerValNetSum);
+          this.individual['data'].push(entity.CustomerValNetSum);
+          
+          this.proprietary['labels'].push(dateStr);
+					this.proprietary['data'].push(entity.TradingValNetSum);
 
 					this.middleInstitution['labels'].push(dateStr);
 					this.middleInstitution['data'].push(entity.FundValNet);
-					this.middleInstitution['sumData'].push(entity.FundValNetSum);
+          this.middleInstitution['sumData'].push(entity.FundValNetSum);
+          this.middleInstitution['barColors'].push((entity.FundValNet > 0 ? '#38ada1' : '#ef534f'));
+          this.middleInstitution['border'].push((entity.FundValNetSum > 0 ? '#38ada1' : '#ef534f'));
 
 					this.middleForeign['labels'].push(dateStr);
 					this.middleForeign['data'].push(entity.ForeignValNet);
-					this.middleForeign['sumData'].push(entity.ForeignValNetSum);
+          this.middleForeign['sumData'].push(entity.ForeignValNetSum);
+          this.middleForeign['barColors'].push((entity.ForeignValNet > 0 ? '#38ada1' : '#ef534f'));
+          this.middleForeign['border'].push((entity.ForeignValNetSum > 0 ? '#38ada1' : '#ef534f'));
 
 					this.middleIndividual['labels'].push(dateStr);
 					this.middleIndividual['data'].push(entity.CustomerValNet);
-					this.middleIndividual['sumData'].push(entity.CustomerValNetSum);
+          this.middleIndividual['sumData'].push(entity.CustomerValNetSum);
+          this.middleIndividual['barColors'].push((entity.CustomerValNet > 0 ? '#38ada1' : '#ef534f'));
+          this.middleIndividual['border'].push((entity.CustomerValNetSum > 0 ? '#38ada1' : '#ef534f'));
 
 					this.middleProprietary['labels'].push(dateStr);
 					this.middleProprietary['data'].push(entity.TradingValNet);
-					this.middleProprietary['sumData'].push(entity.TradingValNetSum);
+          this.middleProprietary['sumData'].push(entity.TradingValNetSum);
+          this.middleProprietary['barColors'].push((entity.TradingValNet > 0 ? '#38ada1' : '#ef534f'));
+          this.middleProprietary['border'].push((entity.TradingValNetSum > 0 ? '#38ada1' : '#ef534f'));
 				});
 				this.count++;
-				this.middleCount++;
+        this.middleCount++;
 			},
 			async loadTableData() {
 				this.tableData = {};
