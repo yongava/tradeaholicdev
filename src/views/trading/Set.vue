@@ -4,6 +4,7 @@
       <div class="text-center">
         <h5>SET</h5>
       </div>
+
       <div>
         <apexchart
           width="100%"
@@ -14,10 +15,10 @@
           :key="'set-' + count"
         ></apexchart>
       </div>
-
-      <div class="text-center">
+      <div class="text-center mb-3">
         <h5>Local Institutions</h5>
       </div>
+
       <div>
         <line-chart
           border="#ef534f"
@@ -27,10 +28,10 @@
           :data="local['data']"
         ></line-chart>
       </div>
-
-      <div class="text-center">
+      <div class="text-center my-3">
         <h5>Foreign Investors</h5>
       </div>
+
       <div>
         <line-chart
           border="#38ada1"
@@ -40,10 +41,10 @@
           :data="foreign['data']"
         ></line-chart>
       </div>
-
-      <div class="text-center">
-        <h5>Local individuals</h5>
+      <div class="text-center my-3">
+        <h5>Local Individuals</h5>
       </div>
+
       <div>
         <line-chart
           border="#797b86"
@@ -54,10 +55,10 @@
           :x-show="true"
         ></line-chart>
       </div>
-
-      <div class="text-center">
+      <div class="text-center my-3">
         <h5>Institution Trading Value</h5>
       </div>
+
     </app-card>
 
     <app-card customClasses="grid-b-space tabs-table-wrap">
@@ -166,7 +167,7 @@
 
     <app-card customClasses="grid-b-space tabs-table-wrap">
       <b-tabs>
-        <b-tab v-for="(tab, index) of tableTabs" :active="index === 0" :title="tab.title">
+        <b-tab v-for="(tab, index) of tableTabs" :active="index === 0" :title="tab.title" :key="index + '-' + tableCount + 'table-tab'">
           <div class="table-responsive">
             <table class="table table-striped custom-table">
               <thead>
@@ -186,39 +187,16 @@
               </tr>
               </thead>
               <tbody>
-              <tr>
-                <td>Local Institutions</td>
-                <td class="text-right">{{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][0][0])}}</td>
-                <td class="text-right">{{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][0][1])}}</td>
-                <td class="text-right" :class="tableData && tableData[tab.value] && tableData[tab.value][0][2] >= 0 ? 'text-success': 'text-warning'">
-                  {{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][0][2])}}
+              <tr v-for="(row, index) in tableRowNames">
+                <td>{{row}}</td>
+                <td class="text-right">
+                  {{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][index][0])}}
                 </td>
-              </tr>
-
-              <tr>
-                <td>Foreign Investors</td>
-                <td class="text-right">{{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][1][0])}}</td>
-                <td class="text-right">{{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][1][1])}}</td>
-                <td class="text-right" :class="tableData && tableData[tab.value] && tableData[tab.value][1][2] >= 0 ? 'text-success': 'text-warning'">
-                  {{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][1][2])}}
+                <td class="text-right">
+                  {{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][index][1])}}
                 </td>
-              </tr>
-
-              <tr>
-                <td>Proprietary Trading</td>
-                <td class="text-right">{{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][2][0])}}</td>
-                <td class="text-right">{{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][2][1])}}</td>
-                <td class="text-right" :class="tableData && tableData[tab.value] && tableData[tab.value][2][2] >= 0 ? 'text-success': 'text-warning'">
-                  {{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][2][2])}}
-                </td>
-              </tr>
-
-              <tr>
-                <td>Local Individuals</td>
-                <td class="text-right">{{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][3][0])}}</td>
-                <td class="text-right">{{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][3][1])}}</td>
-                <td class="text-right" :class="tableData && tableData[tab.value] && tableData[tab.value][3][2] >= 0 ? 'text-success': 'text-warning'">
-                  {{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][3][2])}}
+                <td class="text-right" :class="tableData && tableData[tab.value] && tableData[tab.value][index][2] >= 0 ? 'text-success': 'text-warning'">
+                  {{numberWithCommas(tableData && tableData[tab.value] && tableData[tab.value][index][2])}}
                 </td>
               </tr>
               </tbody>
@@ -329,8 +307,15 @@
 						value: 'YTD',
 					}
 				],
+        tableRowNames: [
+        	'Local Institutions',
+          'Foreign Investors',
+          'Proprietary Trading',
+          'Local Individuals'
+        ],
 				count: 0,
 				middleCount: 0,
+        tableCount: 0,
 			}
 		},
 		methods: {
@@ -351,7 +336,10 @@
 
 				const apiUrl = 'https://yong.alpha.lab.ai/tradesum_set';
 				const res = await axios.get(apiUrl);
-				res && res.data.map(entity => {
+				res &&
+				res.data &&
+				res.data.sort((a, b) => (a.date > b.date ? 1 : -1))
+				res.data.map(entity => {
 					this.series[0].data.push({
 						x: entity.date,
 						y: [entity.SETopen, entity.SEThigh, entity.SETlow, entity.SETclose]
@@ -400,7 +388,7 @@
 									res.data[0]['FundValBuySum'],
 									res.data[0]['FundValSellSum'],
 									res.data[0]['FundValNetSum'],
-                ],
+								],
 								[
 									res.data[0]['ForeignValBuySum'],
 									res.data[0]['ForeignValSellSum'],
@@ -416,14 +404,14 @@
 									res.data[0]['CustomerValSellSum'],
 									res.data[0]['CustomerValNetSum'],
 								]
-              ]
+							]
 						}
-          } catch (e) {
-            console.log(e);
+					} catch (e) {
+						console.log(e);
 					}
 				}
 
-				console.log(this.tableData);
+				this.tableCount++;
 			},
 			numberWithCommas(x) {
 				return numberWithCommas(x);

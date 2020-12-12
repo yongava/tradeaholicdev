@@ -1,5 +1,5 @@
 <template>
-  <div :key="count + 'wrapper' + individual">
+  <div :key="count + 'wrapper' + individual" class="my-3">
     <div class="text-center">
       <h5>{{title}}</h5>
     </div>
