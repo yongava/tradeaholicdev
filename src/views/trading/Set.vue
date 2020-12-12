@@ -5,28 +5,54 @@
         <h5>SET</h5>
       </div>
       <div>
-        <apexchart width="100%" height="200px" type="candlestick" :options="options" :series="series"></apexchart>
+        <apexchart
+          width="100%"
+          :height="200"
+          type="candlestick"
+          :options="options"
+          :series="series"
+          :key="'set-' + count"
+        ></apexchart>
       </div>
 
       <div class="text-center">
         <h5>Local Institutions</h5>
       </div>
       <div>
-        <line-chart border="#ef534f" :height="200"></line-chart>
+        <line-chart
+          border="#ef534f"
+          :height="200"
+          :key="'local-' + count"
+          :labels="local['labels']"
+          :data="local['data']"
+        ></line-chart>
       </div>
 
       <div class="text-center">
         <h5>Foreign Investors</h5>
       </div>
       <div>
-        <line-chart border="#38ada1" :height="200"></line-chart>
+        <line-chart
+          border="#38ada1"
+          :height="200"
+          :key="'foreign-' + count"
+          :labels="foreign['labels']"
+          :data="foreign['data']"
+        ></line-chart>
       </div>
 
       <div class="text-center">
         <h5>Local individuals</h5>
       </div>
       <div>
-        <line-chart border="#797b86" :height="200"></line-chart>
+        <line-chart
+          border="#797b86"
+          :height="200"
+          :key="'individual-' + count"
+          :labels="individual['labels']"
+          :data="individual['data']"
+          :x-show="true"
+        ></line-chart>
       </div>
 
       <div class="text-center">
@@ -36,75 +62,103 @@
 
     <app-card customClasses="grid-b-space tabs-table-wrap">
       <b-tabs>
-        <b-tab title="Overview" active>
+        <b-tab title="ALL" active @click="middleCount++">
           <div class="row">
             <div class="col-md-6 my-2">
-              <div class="text-center">
-                <h5>Institution Trading Value</h5>
-              </div>
-              <div>
-                <two-line-chart :height="200"></two-line-chart>
-              </div>
-
-              <div>
-                <two-bar-chart :height="200"></two-bar-chart>
-              </div>
-
-              <div>
-                <bar-chart :height="200"></bar-chart>
-              </div>
+              <set-middle
+                title="Institution Trading Value"
+                :data="middleInstitution['data']"
+                :sumData="middleInstitution['sumData']"
+                :labels="middleInstitution['labels']"
+                :count="middleCount"
+                individual="0"
+              ></set-middle>
             </div>
 
             <div class="col-md-6 my-2">
-              <div class="text-center">
-                <h5>Foreign Trading Value</h5>
-              </div>
-              <div>
-                <two-line-chart :height="200"></two-line-chart>
-              </div>
-
-              <div>
-                <two-bar-chart :height="200"></two-bar-chart>
-              </div>
-
-              <div>
-                <bar-chart :height="200"></bar-chart>
-              </div>
+              <set-middle
+                title="Foreign Trading Value"
+                :data="middleForeign['data']"
+                :sumData="middleForeign['sumData']"
+                :labels="middleForeign['labels']"
+                :count="middleCount"
+                individual="0"
+              ></set-middle>
             </div>
 
             <div class="col-md-6 my-2">
-              <div class="text-center">
-                <h5>Individual Trading Value</h5>
-              </div>
-              <div>
-                <two-line-chart :height="200"></two-line-chart>
-              </div>
-
-              <div>
-                <two-bar-chart :height="200"></two-bar-chart>
-              </div>
-
-              <div>
-                <bar-chart :height="200"></bar-chart>
-              </div>
+              <set-middle
+                title="Individual Trading Value"
+                :data="middleIndividual['data']"
+                :sumData="middleIndividual['sumData']"
+                :labels="middleIndividual['labels']"
+                :count="middleCount"
+                individual="0"
+              ></set-middle>
             </div>
 
             <div class="col-md-6 my-2">
-              <div class="text-center">
-                <h5>Proprietaty Trading Value</h5>
-              </div>
-              <div>
-                <two-line-chart :height="200"></two-line-chart>
-              </div>
-
-              <div>
-                <two-bar-chart :height="200"></two-bar-chart>
-              </div>
-
-              <div>
-                <bar-chart :height="200"></bar-chart>
-              </div>
+              <set-middle
+                title="Proprietary Trading Value"
+                :data="middleProprietary['data']"
+                :sumData="middleProprietary['sumData']"
+                :labels="middleProprietary['labels']"
+                :count="middleCount"
+                individual="0"
+              ></set-middle>
             </div>
+          </div>
+        </b-tab>
+
+        <b-tab title="INSTITUTION" @click="middleCount++">
+          <div class="col-md-12 my-2">
+            <set-middle
+              title="Institution Trading Value"
+              :data="middleInstitution['data']"
+              :sumData="middleInstitution['sumData']"
+              :labels="middleInstitution['labels']"
+              :count="middleCount"
+              :individual="1"
+            ></set-middle>
+          </div>
+        </b-tab>
+
+        <b-tab title="FOREIGN" @click="middleCount++">
+          <div class="col-md-12 my-2">
+            <set-middle
+              title="Foreign Trading Value"
+              :data="middleForeign['data']"
+              :sumData="middleForeign['sumData']"
+              :labels="middleForeign['labels']"
+              :count="middleCount"
+              :individual="1"
+            ></set-middle>
+          </div>
+        </b-tab>
+
+        <b-tab title="PROPRIETARY" @click="middleCount++">
+          <div class="col-md-12 my-2">
+            <set-middle
+              title="Proprietary Trading Value"
+              :data="middleProprietary['data']"
+              :sumData="middleProprietary['sumData']"
+              :labels="middleProprietary['labels']"
+              :count="middleCount"
+              :individual="1"
+            ></set-middle>
+          </div>
+        </b-tab>
+
+        <b-tab title="INDIVIDUAL" @click="middleCount++">
+          <div class="col-md-12 my-2">
+            <set-middle
+              title="Individual Trading Value"
+              :data="middleIndividual['data']"
+              :sumData="middleIndividual['sumData']"
+              :labels="middleIndividual['labels']"
+              :count="middleCount"
+              :individual="1"
+            ></set-middle>
           </div>
         </b-tab>
       </b-tabs>
@@ -112,7 +166,7 @@
 
     <app-card customClasses="grid-b-space tabs-table-wrap">
       <b-tabs>
-        <b-tab title="NET" active>
+        <b-tab v-for="(tab, index) of tableTabs" :active="index === 0" :title="tab.title">
           <div class="table-responsive">
             <table class="table table-striped custom-table">
               <thead>
@@ -134,37 +188,37 @@
               <tbody>
               <tr>
                 <td>Local Institutions</td>
-                <td class="text-right">12,343.34</td>
-                <td class="text-right">23,333.32</td>
-                <td class="text-right text-warning">
-                  -34.34
+                <td class="text-right">{{numberWithCommas(tableData[tab.value][0][0])}}</td>
+                <td class="text-right">{{numberWithCommas(tableData[tab.value][0][1])}}</td>
+                <td class="text-right" :class="tableData[tab.value][0][2] >= 0 ? 'text-success': 'text-warning'">
+                  {{numberWithCommas(tableData[tab.value][0][2])}}
                 </td>
               </tr>
 
               <tr>
                 <td>Foreign Investors</td>
-                <td class="text-right">12,343.34</td>
-                <td class="text-right">23,333.32</td>
-                <td class="text-right text-success">
-                  +34.34
-                </td>
-              </tr>
-
-              <tr>
-                <td>Local Individuals</td>
-                <td class="text-right">12,343.34</td>
-                <td class="text-right">23,333.32</td>
-                <td class="text-right text-warning">
-                  -34.34
+                <td class="text-right">{{numberWithCommas(tableData[tab.value][1][0])}}</td>
+                <td class="text-right">{{numberWithCommas(tableData[tab.value][1][1])}}</td>
+                <td class="text-right" :class="tableData[tab.value][1][2] >= 0 ? 'text-success': 'text-warning'">
+                  {{numberWithCommas(tableData[tab.value][1][2])}}
                 </td>
               </tr>
 
               <tr>
                 <td>Proprietary Trading</td>
-                <td class="text-right">12,343.34</td>
-                <td class="text-right">23,333.32</td>
-                <td class="text-right text-success">
-                  +34.34
+                <td class="text-right">{{numberWithCommas(tableData[tab.value][2][0])}}</td>
+                <td class="text-right">{{numberWithCommas(tableData[tab.value][2][1])}}</td>
+                <td class="text-right" :class="tableData[tab.value][2][2] >= 0 ? 'text-success': 'text-warning'">
+                  {{numberWithCommas(tableData[tab.value][2][2])}}
+                </td>
+              </tr>
+
+              <tr>
+                <td>Local Individuals</td>
+                <td class="text-right">{{numberWithCommas(tableData[tab.value][3][0])}}</td>
+                <td class="text-right">{{numberWithCommas(tableData[tab.value][3][1])}}</td>
+                <td class="text-right" :class="tableData[tab.value][3][2] >= 0 ? 'text-success': 'text-warning'">
+                  {{numberWithCommas(tableData[tab.value][3][2])}}
                 </td>
               </tr>
               </tbody>
@@ -181,14 +235,23 @@
 	import TwoLineChart from "../charts/vue-chartjs/TwoLineChart";
 	import BarChart from "../charts/vue-chartjs/BarChart";
 	import TwoBarChart from "../charts/vue-chartjs/TwoBarChart";
+	import SetMiddle from "../../components/TradingValue/SetMiddle";
+	import axios from 'axios';
+	import * as moment from 'moment';
+	import {numberWithCommas} from "../../commons/utils";
 
 	export default {
 		components: {
 			LineChart,
-      TwoLineChart,
-      BarChart,
-      TwoBarChart
-    },
+			TwoLineChart,
+			BarChart,
+			TwoBarChart,
+			SetMiddle,
+		},
+		mounted() {
+			this.loadData();
+			this.loadTableData();
+		},
 		data() {
 			return {
 				options: {
@@ -213,20 +276,158 @@
 					},
 				},
 				series: [{
-					data: [{
-						x: new Date(2016, 1, 1),
-						y: [51.98, 56.29, 51.59, 53.85]
+					data: []
+				}],
+				local: {
+					labels: [],
+					data: []
+				},
+				foreign: {
+					labels: [],
+					data: [],
+				},
+				individual: {
+					labels: [],
+					data: [],
+				},
+				middleInstitution: {
+					labels: [],
+					data: [],
+					sumData: [],
+				},
+				middleForeign: {
+					labels: [],
+					data: [],
+					sumData: [],
+				},
+				middleIndividual: {
+					labels: [],
+					data: [],
+					sumData: [],
+				},
+				middleProprietary: {
+					labels: [],
+					data: [],
+					sumData: [],
+				},
+				tableData: {},
+				tableTabs: [
+					{
+						title: 'RECENT',
+						value: 'recent',
 					},
-						{
-							x: new Date(2016, 2, 1),
-							y: [53.66, 54.99, 51.35, 52.95]
-						},
-						{
-							x: new Date(2016, 8, 1),
-							y: [52.76, 57.35, 52.15, 57.03]
-						}]
-				}]
+					{
+						title: 'MTD',
+						value: 'MTD',
+					},
+					{
+						title: 'QTD',
+						value: 'QTD',
+					},
+					{
+						title: 'YTD',
+						value: 'YTD',
+					}
+				],
+				count: 0,
+				middleCount: 0,
 			}
+		},
+		methods: {
+			async loadData() {
+				this.series[0].data = [];
+				this.local = {
+					labels: [],
+					data: [],
+				};
+				this.foreign = {
+					labels: [],
+					data: [],
+				};
+				this.individual = {
+					labels: [],
+					data: [],
+				};
+
+				const apiUrl = 'https://yong.alpha.lab.ai/tradesum_set';
+				const res = await axios.get(apiUrl);
+				res && res.data.map(entity => {
+					this.series[0].data.push({
+						x: entity.date,
+						y: [entity.SETopen, entity.SEThigh, entity.SETlow, entity.SETclose]
+					});
+
+					const dateStr = moment(entity.date).format("MMM DD");
+
+					this.local['labels'].push(dateStr);
+					this.local['data'].push(entity.FundValNetSum);
+
+					this.foreign['labels'].push(dateStr);
+					this.foreign['data'].push(entity.ForeignValNetSum);
+
+					this.individual['labels'].push(dateStr);
+					this.individual['data'].push(entity.CustomerValNetSum);
+
+					this.middleInstitution['labels'].push(dateStr);
+					this.middleInstitution['data'].push(entity.FundValNet);
+					this.middleInstitution['sumData'].push(entity.FundValNetSum);
+
+					this.middleForeign['labels'].push(dateStr);
+					this.middleForeign['data'].push(entity.ForeignValNet);
+					this.middleForeign['sumData'].push(entity.ForeignValNetSum);
+
+					this.middleIndividual['labels'].push(dateStr);
+					this.middleIndividual['data'].push(entity.CustomerValNet);
+					this.middleIndividual['sumData'].push(entity.CustomerValNetSum);
+
+					this.middleProprietary['labels'].push(dateStr);
+					this.middleProprietary['data'].push(entity.TradingValNet);
+					this.middleProprietary['sumData'].push(entity.TradingValNetSum);
+				});
+				this.count++;
+				this.middleCount++;
+			},
+			async loadTableData() {
+				const apiUrl = 'https://yong.alpha.lab.ai/tradesum_set/recent/';
+				this.tableData = {};
+
+				for (let i = 0; i < this.tableTabs.length; i++) {
+					try {
+						const res = await axios.get(apiUrl + this.tableTabs[i].value);
+						if (res.data && res.data[0]) {
+							this.tableData[this.tableTabs[i].value] = [
+								[
+									res.data[0]['FundValBuySum'],
+									res.data[0]['FundValSellSum'],
+									res.data[0]['FundValNetSum'],
+                ],
+								[
+									res.data[0]['ForeignValBuySum'],
+									res.data[0]['ForeignValSellSum'],
+									res.data[0]['ForeignValNetSum'],
+								],
+								[
+									res.data[0]['TradingValBuySum'],
+									res.data[0]['TradingValSellSum'],
+									res.data[0]['TradingValNetSum'],
+								],
+								[
+									res.data[0]['CustomerValBuySum'],
+									res.data[0]['CustomerValSellSum'],
+									res.data[0]['CustomerValNetSum'],
+								]
+              ]
+						}
+          } catch (e) {
+            console.log(e);
+					}
+				}
+
+				console.log(this.tableData);
+			},
+			numberWithCommas(x) {
+				return numberWithCommas(x);
+			},
 		}
 	}
 </script>
@@ -239,5 +440,9 @@
 
   .nav-link:hover {
     color: #f08d67 !important;
+  }
+
+  .text-warning {
+    color: red !important;
   }
 </style>

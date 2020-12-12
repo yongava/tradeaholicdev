@@ -312,6 +312,7 @@
 
 <script>
 	import axios from 'axios'
+	import {numberWithCommas} from "../../commons/utils";
 
 	export default {
 		mounted() {
@@ -432,7 +433,7 @@
 				}
 			},
 			numberWithCommas(x) {
-				return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+				return numberWithCommas(x);
 			},
 			numberToFixed(num) {
 				return num.toFixed(2);

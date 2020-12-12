@@ -30,15 +30,16 @@ export default {
 			}
 		}
 	},
+	props: ['data', 'labels'],
 	mounted() {
 		this.renderChart({
-			labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+			labels: this.labels || ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
 			datasets: [
 				{
 					label: 'Data One',
 					// backgroundColor: ChartConfig.color.warning,
 					backgroundColor: '#ef534f',
-					data: [40, 35, 60, 70, 20, 35, 40]
+					data: this.data || [40, 35, 60, 70, 20, 35, 40]
 				}
 			]
 		}, this.options)

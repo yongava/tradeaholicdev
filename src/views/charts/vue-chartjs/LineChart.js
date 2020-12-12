@@ -1,6 +1,6 @@
-import { Line } from 'vue-chartjs'
+import {Line} from 'vue-chartjs'
 import ChartConfig from 'Constants/ChartConfig';
-import { hexToRgbA } from 'Helpers/helpers';
+import {hexToRgbA} from 'Helpers/helpers';
 
 export default {
 	extends: Line,
@@ -10,7 +10,7 @@ export default {
 			gradient2: null
 		}
 	},
-	props: ['border'],
+	props: ['border', 'labels', 'data', 'background', 'xShow'],
 	mounted() {
 		this.gradient = this.$refs.canvas.getContext('2d').createLinearGradient(500, 0, 100, 0)
 		this.gradient2 = this.$refs.canvas.getContext('2d').createLinearGradient(500, 0, 100, 0)
@@ -21,10 +21,22 @@ export default {
 		this.gradient2.addColorStop(0, hexToRgbA(ChartConfig.color.primary, 0.6))
 		this.gradient2.addColorStop(1, hexToRgbA(ChartConfig.color.danger, 0.6))
 
-		const scales = {xAxes:[{ticks: {display: false}}]}
+		const scales = {
+			xAxes:
+				[
+					{
+						ticks: {
+							display: this.xShow,
+							maxRotation: 0,
+							minRotation: 0,
+							autoSkip: true
+						}
+					}
+				]
+		}
 
 		this.renderChart({
-			labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+			labels: this.labels || ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
 			datasets: [{
 				label: 'Data',
 				// borderColor: this.gradient,
@@ -39,11 +51,12 @@ export default {
 				// fill: true,
 				// backgroundColor: this.gradient2,
 				// borderWidth: 4,
+				pointRadius: 1,
 				borderWidth: 2,
-				backgroundColor: 'transparent',
+				backgroundColor: this.background ? this.background : 'transparent',
 				borderColor: this.border,
-				data: [100, 120, 150, 170, 180, 170, 160, 190]
+				data: this.data || [100, 120, 150, 170, 180, 170, 160, 190]
 			}]
-		}, { responsive: true, maintainAspectRatio: false, legend: { position: 'top', display: false }, scales })
+		}, {responsive: true, maintainAspectRatio: false, legend: {position: 'top', display: false}, scales})
 	}
 }
