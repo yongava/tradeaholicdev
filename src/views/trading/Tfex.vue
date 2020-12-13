@@ -52,6 +52,7 @@
           :key="'individual-' + count"
           :labels="individual['labels']"
           :data="individual['data']"
+          :x-show="true"
         ></line-chart>
       </div>
 
