@@ -230,8 +230,8 @@
 		},
 		data() {
 			return {
-				apiUrl: 'https://yong.alpha.lab.ai/tradesum_set',
-				tableApiUrl: 'https://yong.alpha.lab.ai/tradesum_set/recent/',
+				apiUrl: 'https://yong.alpha.lab.ai/tradesum_tfex',
+				tableApiUrl: 'https://yong.alpha.lab.ai/tradesum_tfex/recent/',
 				options: {
 					candlestick: {
 						colors: {
