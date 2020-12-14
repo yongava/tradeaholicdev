@@ -55,11 +55,11 @@
         contentImages: [
 					{
 						tab: 'SET',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/SET.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/SET.png',
 					},
           {
           	tab: 'SET50',
-            url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/SET50.png',
+            url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/SET50.png',
           }
         ]
       }

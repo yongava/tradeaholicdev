@@ -56,107 +56,107 @@
 				contentImages: [
 					{
 						tab: 'AGRI',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/AGRI.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/AGRI.png',
 					},
 					{
 						tab: 'FOOD',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/FOOD.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/FOOD.png',
 					},
 					{
 						tab: 'FASHION',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/FASHION.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/FASHION.png',
 					},
 					{
 						tab: 'HOME',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/HOME.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/HOME.png',
 					},
 					{
 						tab: 'PERSON',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/PERSON.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/PERSON.png',
 					},
 					{
 						tab: 'BANK',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/BANK.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/BANK.png',
 					},
 					{
 						tab: 'FIN',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/FIN.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/FIN.png',
 					},
 					{
 						tab: 'INSUR',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/INSUR.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/INSUR.png',
 					},
 					{
 						tab: 'AUTO',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/AUTO.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/AUTO.png',
 					},
 					{
 						tab: 'IMM',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/IMM.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/IMM.png',
 					},
 					{
 						tab: 'PAPER',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/PAPER.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/PAPER.png',
 					},
 					{
 						tab: 'PETRO',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/PETRO.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/PETRO.png',
 					},
 					{
 						tab: 'PKG',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/PKG.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/PKG.png',
 					},
 					{
 						tab: 'STEEL',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/STEEL.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/STEEL.png',
 					},
 					{
 						tab: 'CONMAT',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/CONMAT.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/CONMAT.png',
 					},
 					{
 						tab: 'CONS',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/CONS.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/CONS.png',
 					},
 					{
 						tab: 'PROP',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/PROP.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/PROP.png',
 					},
 					{
 						tab: 'ENERG',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/ENERG.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/ENERG.png',
 					},
 					{
 						tab: 'COMM',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/COMM.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/COMM.png',
 					},
 					{
 						tab: 'HELTH',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/HELTH.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/HELTH.png',
 					},
 					{
 						tab: 'MEDIA',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/MEDIA.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/MEDIA.png',
 					},
 					{
 						tab: 'PROPF',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/PROF.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/PROF.png',
 					},
 					{
 						tab: 'TROURISM',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/TOURISM.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/TOURISM.png',
 					},
 					{
 						tab: 'TRANS',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/TRANS.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/TRANS.png',
 					},
 					{
 						tab: 'ETRON',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/ETRON.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/ETRON.png',
 					},
 					{
 						tab: 'ICT',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/ICT.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/ICT.png',
 					},
 				]
 			}

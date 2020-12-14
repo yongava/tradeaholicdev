@@ -55,35 +55,35 @@
 				contentImages: [
 					{
 						tab: 'AGRO',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/AGRO.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/AGRO.png',
 					},
 					{
 						tab: 'CONSUMP',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/CONSUMP.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/CONSUMP.png',
 					},
 					{
 						tab: 'FINCIAL',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/FINCIAL.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/FINCIAL.png',
 					},
 					{
 						tab: 'INDUS',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/INDUS.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/INDUS.png',
 					},
 					{
 						tab: 'PROPCON',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/PROPCON.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/PROPCON.png',
 					},
 					{
 						tab: 'RESOURC',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/RESOURC.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/RESOURC.png',
 					},
 					{
 						tab: 'SERVICE',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/SERVICE.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/SERVICE.png',
 					},
 					{
 						tab: 'TECH',
-						url: 'https://ava-scbam.s3-ap-southeast-1.amazonaws.com/rrg-images/TECH.png',
+						url: 'https://alpharesearch.blob.core.windows.net/yongcontainer/TECH.png',
 					}
 				]
 			}
