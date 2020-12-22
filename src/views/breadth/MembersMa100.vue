@@ -1,6 +1,10 @@
 <template>
   <div>
     <app-card customClasses="grid-b-space tabs-table-wrap">
+      <Spinner
+        class="spinner"
+        v-if="loading"
+      />
 
       <div class="text-center">
         <h5>SET</h5>
@@ -17,28 +21,28 @@
       </div>
 
       <div class="text-center mb-3">
-        <h5>% of Members with Price > MA100</h5>
+        <h5>% of Members with New 52 Week High</h5>
       </div>
       <div>
         <line-chart
           border="#ef534f"
           :height="200"
           :key="'local-' + count"
-          :labels="local['labels']"
-          :data="local['data']"
+          :labels="high['labels']"
+          :data="high['data']"
         ></line-chart>
       </div>
 
       <div class="text-center my-3">
-        <h5>% of Members with Price < MA100</h5>
+        <h5>% of Members with New 52 Week Low</h5>
       </div>
       <div>
         <line-chart
           border="#38ada1"
           :height="200"
           :key="'foreign-' + count"
-          :labels="foreign['labels']"
-          :data="foreign['data']"
+          :labels="low['labels']"
+          :data="low['data']"
           :x-show="true"
         ></line-chart>
       </div>
@@ -50,65 +54,37 @@
         <table class="table table-striped custom-table">
           <thead>
           <tr>
-            <th>
-              Date
-            </th>
-            <th class="text-right">
-              Last
-            </th>
-            <th class="text-right">
-              CHG
-            </th>
-            <th class="text-right">
-              %CHG
-            </th>
-            <th class="text-right">
-              Volume
-            </th>
-            <th class="text-right">
-              Value
-            </th>
-            <th class="text-right">
-              % > MA100
-            </th>
-            <th class="text-right">
-              % < MA100
-            </th>
-            <th class="text-right">
-              %Swing
+            <th v-for="(column, key) of table" :key="key + 'th'" :class="column.align">
+              {{column.title}}
             </th>
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>20/20/20</td>
-            <td class="text-right">
-              1,234.23
-            </td>
-            <td class="text-right text-warning">
-              -23.22
-            </td>
-            <td class="text-right text-warning">
-              -11.11
+          <tr v-for="(row, index) of currentData" :key="index + 'tr'">
+            <td class="text-left">
+              {{row['symbol']}}
             </td>
             <td class="text-right">
-              2,344.33
+              {{numberWithCommas(row['last'])}}
+            </td>
+            <td class="text-right":class="row['change'] >= 0 ? 'text-success' : 'text-warning'">
+              {{numberWithCommas(row['change'])}}
+            </td>
+            <td class="text-right" :class="row['pct_change'] >= 0 ? 'text-success' : 'text-warning'">
+              {{row['pct_change']}}
             </td>
             <td class="text-right">
-              2,344.33
+              {{numberWithCommas(row['volume'])}}
             </td>
-            <td class="text-right text-success">
-              +3.23
-            </td>
-            <td class="text-right text-success">
-              +3.23
-            </td>
-            <td class="text-right text-success">
-              +3.23
+            <td class="text-right">
+              {{numberWithCommas(row['value'])}}
             </td>
           </tr>
           </tbody>
         </table>
+
+        <b-pagination v-if="(tableData && tableData.length > 0)" class="mt-2" align="center" :limit="numberOfPageBtns" :total-rows="totalRows" v-model="pageNumber" :per-page="perPage">
+        </b-pagination>
       </div>
     </app-card>
   </div>
@@ -131,7 +107,8 @@
     },
     data() {
       return {
-        apiUrl: 'https://yong.alpha.lab.ai/tradesum_set',
+        loading: false,
+        apiUrl: 'https://yong.alpha.lab.ai/marketbreadth',
         options: {
           candlestick: {
             colors: {
@@ -156,48 +133,108 @@
         series: [{
           data: []
         }],
-        local: {
+        high: {
           labels: [],
           data: []
         },
-        foreign: {
+        low: {
           labels: [],
           data: [],
         },
+        table: [
+          {
+            title: 'Symbol',
+            align: 'text-left',
+          },
+          {
+            title: 'Last',
+            align: 'text-right',
+          },
+          {
+            title: 'Chg',
+            align: 'text-right',
+          },
+          {
+            title: '%Chg',
+            align: 'text-right',
+          },
+          {
+            title: 'Volume',
+            align: 'text-right',
+          },
+          {
+            title: '%Value',
+            align: 'text-right',
+          },
+        ],
+        tableData: [],
         count: 0,
+        totalRows: 0,
+        pageNumber: 1,
+        perPage: 10,
+        numberOfPageBtns: 9,
+      }
+    },
+    computed: {
+      currentData: function () {
+        return (this.tableData && this.tableData.slice(this.perPage * (this.pageNumber - 1), this.perPage * (this.pageNumber))) || [];
       }
     },
     methods: {
       async loadData() {
-        this.series[0].data = [];
-        this.local = {
-          labels: [],
-          data: [],
-        };
-        this.foreign = {
-          labels: [],
-          data: [],
-        };
+        try {
+          this.loading = true;
+          const response = await axios.get(this.apiUrl);
+          this.loading = false;
+          if (response) {
+            const sma = response.data && response.data.sma_result;
+            const stocks = response.data && response.data.stocks_above_sma;
+            sma && sma.sort((a, b) => {
+              return new Date(a.DATE).getTime() - new Date(b.DATE).getTime();
+            });
 
-        const res = await axios.get(this.apiUrl);
-        res &&
-        res.data &&
-        res.data.sort((a, b) => (a.date > b.date ? 1 : -1));
+            this.series[0].data = [];
+            this.high = {
+              labels: [],
+              data: [],
+            };
+            this.low = {
+              labels: [],
+              data: [],
+            };
+            this.tableData = [];
+            sma && sma.map(entity => {
+              this.series[0].data.push({
+                x: entity.DATE,
+                y: [entity.OPEN, entity.HIGH, entity.LOW, entity.CLOSE]
+              });
 
-        res.data.map(entity => {
-          this.series[0].data.push({
-            x: entity.date,
-            y: [entity.SETopen, entity.SEThigh, entity.SETlow, entity.SETclose]
-          });
+              const dateStr = moment(entity.DATE).format("MMM DD");
 
-          const dateStr = moment(entity.date).format("MMM DD");
+              this.high['labels'].push(dateStr);
+              this.high['data'].push(entity.percent_above_sma);
 
-          this.local['labels'].push(dateStr);
-          this.local['data'].push(entity.FundValNetSum);
+              this.low['labels'].push(dateStr);
+              this.low['data'].push(entity.percent_below_sma);
+            });
 
-          this.foreign['labels'].push(dateStr);
-          this.foreign['data'].push(entity.ForeignValNetSum);
-        });
+            stocks && stocks.map(entity => {
+              this.tableData.push({
+                'symbol': entity.symbol,
+                'last': entity.last,
+                'change': entity.change,
+                'pct_change': entity.pct_change,
+                'volume': entity.volume,
+                'value': entity.value
+              });
+            });
+
+            this.totalRows = (stocks && stocks.length) || 0;
+          }
+        } catch (e) {
+          console.log(e);
+          this.loading = true;
+        }
         this.count++;
       },
       numberWithCommas(x) {
@@ -205,7 +242,7 @@
       },
       latestDateFormat(date) {
         return moment(date).format('D MMM YYYY');
-      }
+      },
     }
   }
 </script>
@@ -226,5 +263,12 @@
 
   .latest-date {
     font-size: 0.875rem;
+  }
+
+  .spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 </style>

@@ -1,6 +1,10 @@
 <template>
   <div>
     <app-card customClasses="grid-b-space tabs-table-wrap">
+      <Spinner
+        class="spinner"
+        v-if="loading"
+      />
 
       <div class="text-center">
         <h5>SET</h5>
@@ -24,8 +28,8 @@
           border="#ef534f"
           :height="200"
           :key="'local-' + count"
-          :labels="local['labels']"
-          :data="local['data']"
+          :labels="high['labels']"
+          :data="high['data']"
         ></line-chart>
       </div>
 
@@ -37,8 +41,8 @@
           border="#38ada1"
           :height="200"
           :key="'foreign-' + count"
-          :labels="foreign['labels']"
-          :data="foreign['data']"
+          :labels="low['labels']"
+          :data="low['data']"
           :x-show="true"
         ></line-chart>
       </div>
@@ -50,83 +54,46 @@
         <table class="table table-striped custom-table">
           <thead>
           <tr>
-            <th>
-              Date
-            </th>
-            <th class="text-right">
-              Last
-            </th>
-            <th class="text-right">
-              CHG
-            </th>
-            <th class="text-right">
-              %CHG
-            </th>
-            <th class="text-right">
-              Volume
-            </th>
-            <th class="text-right">
-              Value
-            </th>
-            <th class="text-right">
-              %High
-            </th>
-            <th class="text-right">
-              %Low
-            </th>
-            <th class="text-right">
-              %Swing
-            </th>
-            <th class="text-right">
-              SETUNCH
-            </th>
-            <th class="text-right">
-              SETDEC
-            </th>
-            <th class="text-right">
-              SETADV
+            <th v-for="(column, key) of table" :key="key + 'th'" :class="column.align">
+              {{column.title}}
             </th>
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>20/20/20</td>
-            <td class="text-right">
-              1,234.23
-            </td>
-            <td class="text-right text-warning">
-              -23.22
-            </td>
-            <td class="text-right text-warning">
-              -11.11
+          <tr v-for="(row, index) of currentData" :key="index + 'tr'">
+            <td class="text-left">
+              {{row['DATE']}}
             </td>
             <td class="text-right">
-              2,344.33
+              {{numberWithCommas(row['CLOSE'])}}
             </td>
             <td class="text-right">
-              2,344.33
-            </td>
-            <td class="text-right text-success">
-              +3.23
-            </td>
-            <td class="text-right text-success">
-              +3.23
-            </td>
-            <td class="text-right text-success">
-              +3.23
+              {{numberWithCommas(row['OPEN'])}}
             </td>
             <td class="text-right">
-              2,344.33
+              {{numberWithCommas(row['HIGH'])}}
             </td>
             <td class="text-right">
-              2,344.33
+              {{numberWithCommas(row['LOW'])}}
+            </td>
+            <td class="text-right" :class="row['percent_high'] >= 0 ? 'text-success' : 'text-warning'">
+              {{row['percent_high']}}
+            </td>
+            <td class="text-right" :class="row['percent_low'] >= 0 ? 'text-success' : 'text-warning'">
+              {{row['percent_low']}}
             </td>
             <td class="text-right">
-              2,344.33
+              {{row['number_high']}}
+            </td>
+            <td class="text-right">
+              {{row['number_low']}}
             </td>
           </tr>
           </tbody>
         </table>
+
+        <b-pagination v-if="(tableData && tableData.length > 0)" class="mt-2" align="center" :limit="numberOfPageBtns" :total-rows="totalRows" v-model="pageNumber" :per-page="perPage">
+        </b-pagination>
       </div>
     </app-card>
   </div>
@@ -149,7 +116,8 @@
     },
     data() {
       return {
-        apiUrl: 'https://yong.alpha.lab.ai/tradesum_set',
+        loading: false,
+        apiUrl: 'https://yong.alpha.lab.ai/marketbreadth',
         options: {
           candlestick: {
             colors: {
@@ -174,48 +142,128 @@
         series: [{
           data: []
         }],
-        local: {
+        high: {
           labels: [],
           data: []
         },
-        foreign: {
+        low: {
           labels: [],
           data: [],
         },
+        table: [
+          {
+            title: 'Date',
+            key: 'DATE',
+            align: 'text-left',
+          },
+          {
+            title: 'LAST',
+            key: 'CLOSE',
+            align: 'text-right',
+          },
+          {
+            title: 'OPEN',
+            key: 'OPEN',
+            align: 'text-right',
+          },
+          {
+            title: 'HIGH',
+            key: 'HIGH',
+            align: 'text-right',
+          },
+          {
+            title: 'LOW',
+            key: 'LOW',
+            align: 'text-right',
+          },
+          {
+            title: '%High',
+            key: 'percent_high',
+            align: 'text-right',
+          },
+          {
+            title: '%Low',
+            key: 'percent_low',
+            align: 'text-right',
+          },
+          {
+            title: 'No. High',
+            key: 'number_high',
+            align: 'text-right',
+          },
+          {
+            title: 'No. Low',
+            key: 'number_low',
+            align: 'text-right',
+          }
+        ],
+        tableData: [],
         count: 0,
+        totalRows: 0,
+        pageNumber: 1,
+        perPage: 10,
+        numberOfPageBtns: 9,
+      }
+    },
+    computed: {
+      currentData: function () {
+        return (this.tableData && this.tableData.slice(this.perPage * (this.pageNumber - 1), this.perPage * (this.pageNumber))) || [];
       }
     },
     methods: {
       async loadData() {
-        this.series[0].data = [];
-        this.local = {
-          labels: [],
-          data: [],
-        };
-        this.foreign = {
-          labels: [],
-          data: [],
-        };
+        try {
+          this.loading = true;
+          const response = await axios.get(this.apiUrl);
+          this.loading = false;
+          if (response) {
+            const ath = response.data && response.data.ath_atl_result;
+            ath && ath.sort((a, b) => {
+              return new Date(a.DATE).getTime() - new Date(b.DATE).getTime();
+            });
 
-        const res = await axios.get(this.apiUrl);
-        res &&
-        res.data &&
-        res.data.sort((a, b) => (a.date > b.date ? 1 : -1));
+            this.series[0].data = [];
+            this.high = {
+              labels: [],
+              data: [],
+            };
+            this.low = {
+              labels: [],
+              data: [],
+            };
+            this.tableData = [];
+            ath && ath.map(entity => {
+              this.series[0].data.push({
+                x: entity.DATE,
+                y: [entity.OPEN, entity.HIGH, entity.LOW, entity.CLOSE]
+              });
 
-        res.data.map(entity => {
-          this.series[0].data.push({
-            x: entity.date,
-            y: [entity.SETopen, entity.SEThigh, entity.SETlow, entity.SETclose]
-          });
+              const dateStr = moment(entity.DATE).format("MMM DD");
 
-          const dateStr = moment(entity.date).format("MMM DD");
+              this.high['labels'].push(dateStr);
+              this.high['data'].push(entity.percent_high);
 
-          this.local['labels'].push(dateStr);
-          this.local['data'].push(entity.FundValNetSum);
+              this.low['labels'].push(dateStr);
+              this.low['data'].push(entity.percent_low);
 
-          this.foreign['labels'].push(dateStr);
-          this.foreign['data'].push(entity.ForeignValNetSum);
-        });
+              this.tableData.push({
+                'DATE': entity.DATE,
+                'CLOSE': entity.CLOSE,
+                'OPEN': entity.OPEN,
+                'HIGH': entity.HIGH,
+                'LOW': entity.LOW,
+                'percent_high': entity.percent_high,
+                'percent_low': entity.percent_low,
+                'number_high': entity.number_high,
+                'number_low': entity.number_low,
+              });
+            });
+            this.totalRows = (ath && ath.length) || 0;
+          }
+        } catch (e) {
+          console.log(e);
+          this.loading = false;
+        }
         this.count++;
       },
       numberWithCommas(x) {
@@ -223,7 +271,7 @@
       },
       latestDateFormat(date) {
         return moment(date).format('D MMM YYYY');
-      }
+      },
     }
   }
 </script>
@@ -244,5 +292,12 @@
 
   .latest-date {
     font-size: 0.875rem;
+  }
+
+  .spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 </style>
