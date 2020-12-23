@@ -21,7 +21,7 @@
       </div>
 
       <div class="text-center mb-3">
-        <h5>% of Members with New 52 Week High</h5>
+        <h5>% of Members Close over SMA 100</h5>
       </div>
       <div>
         <line-chart
@@ -34,7 +34,7 @@
       </div>
 
       <div class="text-center my-3">
-        <h5>% of Members with New 52 Week Low</h5>
+        <h5>% of Members Close below SMA 100</h5>
       </div>
       <div>
         <line-chart
