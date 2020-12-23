@@ -258,6 +258,9 @@
                 'number_low': entity.number_low,
               });
             });
+            this.tableData && this.tableData.sort((a, b) => {
+              return new Date(b.DATE).getTime() - new Date(a.DATE).getTime();
+            });
             this.totalRows = (ath && ath.length) || 0;
           }
         } catch (e) {
