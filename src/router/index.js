@@ -21,6 +21,13 @@ const RrgSet = () => import('Views/rrg/Set')
 const RrgIndustry = () => import('Views/rrg/Industry')
 const RrgSector = () => import('Views/rrg/Sector')
 
+// rrg
+const TechnicalSet = () => import('Views/technical/Set')
+const TechnicalMai = () => import('Views/technical/Mai')
+
+const StrengthSet = () => import('Views/strength/Set')
+const StrengthMai = () => import('Views/strength/Mai')
+
 // dashboard views
 const DashboardOne = () => import('Views/dashboard/DashboardOne')
 const DashboardTwo = () => import('Views/dashboard/DashboardTwo')
@@ -198,6 +205,46 @@ export default new Router({
 						requiresAuth: true,
 						title: 'message.sector',
 						breadcrumb: 'message.rrgSector'
+					}
+				},
+				{
+					name: "Technical Screener Set",
+					path: "/technical/set",
+					component: TechnicalSet,
+					meta: {
+						requiresAuth: true,
+						title: 'message.set',
+						breadcrumb: 'message.technicalScreenerSet'
+					}
+				},
+				{
+					name: "Technical Screener Mai",
+					path: "/technical/mai",
+					component: TechnicalMai,
+					meta: {
+						requiresAuth: true,
+						title: 'message.mai',
+						breadcrumb: 'message.technicalScreenerSet'
+					}
+				},
+				{
+					name: "Relative Strength Set",
+					path: "/strength/set",
+					component: StrengthSet,
+					meta: {
+						requiresAuth: true,
+						title: 'message.set',
+						breadcrumb: 'message.strengthSet'
+					}
+				},
+				{
+					name: "Relative Strength Mai",
+					path: "/strength/mai",
+					component: StrengthMai,
+					meta: {
+						requiresAuth: true,
+						title: 'message.mai',
+						breadcrumb: 'message.strengthMai'
 					}
 				},
 				{

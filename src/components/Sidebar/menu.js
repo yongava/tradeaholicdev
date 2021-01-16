@@ -72,6 +72,40 @@ export default {
 				}
 			]
 		},
+		{
+			"menu_title": "message.technicalScreener",
+			"menu_icon": "zmdi zmdi-shape",
+			"active": false,
+			"child_routes": [
+				{
+					"route_name": "technical-set",
+					"path": "/technical/set",
+					"menu_title": "message.set"
+				},
+				{
+					"route_name": "technical-mai",
+					"path": "/technical/mai",
+					"menu_title": "message.mai"
+				},
+			]
+		},
+		{
+			"menu_title": "message.strength",
+			"menu_icon": "zmdi zmdi-shape",
+			"active": false,
+			"child_routes": [
+				{
+					"route_name": "strength-set",
+					"path": "/strength/set",
+					"menu_title": "message.set"
+				},
+				{
+					"route_name": "strength-mai",
+					"path": "/strength/mai",
+					"menu_title": "message.mai"
+				},
+			],
+		},
 		/*{
 			"menu_title": "message.dashboard",
 			"menu_icon": "zmdi zmdi-view-dashboard",

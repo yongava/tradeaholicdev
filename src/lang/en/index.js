@@ -373,4 +373,11 @@ export default {
   rrgSet: "RRG / SET",
   rrgIndustry: "RRG / Industry",
   rrgSector: "RRG / Sector",
+  technicalScreener: 'TECHNICAL SCREENER',
+  mai: 'MAI',
+  technicalScreenerSet: 'TECHNICAL SCREENER / SET',
+  technicalScreenerMai: 'TECHNICAL SCREENER / MAI',
+  strength: 'RELATIVE STRENGTH',
+  strengthSet: 'RELATIVE STRENGTH / SET',
+  strengthMai: 'RELATIVE STRENGTH / MAI',
 }
