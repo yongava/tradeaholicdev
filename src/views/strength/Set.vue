@@ -183,7 +183,7 @@
       async loadIndustryData() {
         try {
           this.loading = true;
-          const apiUrl = 'http://yong.alpha.lab.ai/relative/SETIndustry';
+          const apiUrl = 'https://yong.alpha.lab.ai/relative/SETIndustry';
           const response = await axios.get(apiUrl);
           if (response) {
             const data = this.sortData(response.data);
