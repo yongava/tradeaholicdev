@@ -154,7 +154,7 @@
       async loadSectorData() {
         try {
           this.loading = true;
-          const apiUrl = 'http://yong.alpha.lab.ai/relative/SETSector';
+          const apiUrl = 'https://yong.alpha.lab.ai/relative/SETSector';
           const response = await axios.get(apiUrl);
           if (response) {
             const data = this.sortData(response.data);
