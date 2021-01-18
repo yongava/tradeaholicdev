@@ -10,7 +10,7 @@
             />
             <b-tabs v-model="step">
               <div v-for="(tab, key) in tabs" :key="'sub-' + key">
-                <b-tab :title="tab.label">
+                <b-tab :title="tab.label" @click="pageNumber = 1">
                   <div class="table-responsive">
                     <table class="table table-striped custom-table">
                       <thead>
