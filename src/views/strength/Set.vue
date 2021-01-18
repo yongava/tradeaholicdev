@@ -153,7 +153,7 @@
     methods: {
       async loadSectorData() {
         try {
-          this.loading = true;
+          this.loadingSector = true;
           const apiUrl = 'https://yong.alpha.lab.ai/relative/SETSector';
           const response = await axios.get(apiUrl);
           if (response) {
@@ -182,7 +182,7 @@
       },
       async loadIndustryData() {
         try {
-          this.loading = true;
+          this.loadingIndustry = true;
           const apiUrl = 'https://yong.alpha.lab.ai/relative/SETIndustry';
           const response = await axios.get(apiUrl);
           if (response) {
