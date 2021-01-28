@@ -380,4 +380,7 @@ export default {
   strength: 'RELATIVE STRENGTH',
   strengthSet: 'RELATIVE STRENGTH / SET',
   strengthMai: 'RELATIVE STRENGTH / MAI',
+  technicalChart: 'TECHNICAL CHART',
+  tradingView: 'TRADING VIEW',
+  technicalTradingView: 'TECHNICAL CHART / TRADING VIEW'
 }

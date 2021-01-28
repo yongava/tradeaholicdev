@@ -28,6 +28,8 @@ const TechnicalMai = () => import('Views/technical/Mai')
 const StrengthSet = () => import('Views/strength/Set')
 const StrengthMai = () => import('Views/strength/Mai')
 
+const ChartTrading = () => import('Views/technical-charts/Trading')
+
 // dashboard views
 const DashboardOne = () => import('Views/dashboard/DashboardOne')
 const DashboardTwo = () => import('Views/dashboard/DashboardTwo')
@@ -245,6 +247,16 @@ export default new Router({
 						requiresAuth: true,
 						title: 'message.mai',
 						breadcrumb: 'message.strengthMai'
+					}
+				},
+				{
+					name: "Technical Chart Trading View",
+					path: "/technical-chart/trading",
+					component: ChartTrading,
+					meta: {
+						requiresAuth: true,
+						title: 'message.tradingView',
+						breadcrumb: 'message.technicalTradingView'
 					}
 				},
 				{

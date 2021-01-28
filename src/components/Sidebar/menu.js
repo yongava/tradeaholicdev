@@ -91,7 +91,7 @@ export default {
 		},
 		{
 			"menu_title": "message.strength",
-			"menu_icon": "zmdi zmdi-shape",
+			"menu_icon": "zmdi zmdi-case",
 			"active": false,
 			"child_routes": [
 				{
@@ -103,6 +103,18 @@ export default {
 					"route_name": "strength-mai",
 					"path": "/strength/mai",
 					"menu_title": "message.mai"
+				},
+			],
+		},
+		{
+			"menu_title": "message.technicalChart",
+			"menu_icon": "zmdi zmdi-dns",
+			"active": false,
+			"child_routes": [
+				{
+					"route_name": "technical-chart-trading",
+					"path": "/technical-chart/trading",
+					"menu_title": "message.tradingView"
 				},
 			],
 		},

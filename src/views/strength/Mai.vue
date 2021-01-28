@@ -7,45 +7,52 @@
       />
       <b-tabs>
         <b-tab title="SECTOR COMPARE" active @click="clickTab()">
-          <b-tabs>
-            <div v-for="(subTab, index) in sectorTabs">
-              <b-tab :title="subTab" :active="index === 0" @click="clickSubTab('sector', subTab)">
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="text-center my-2">
-                      <h5>SET</h5>
-                    </div>
+          <select
+            class="custom-select m-2"
+            style="width: 200px;"
+            @change="clickSubTab('sector', $event.target.value)"
+          >
+            <option
+              v-for="(subTab, index) in sectorTabs"
+              :value="subTab"
+            >
+              {{subTab}}
+            </option>
+          </select>
 
-                    <div class="text-center my-2">
-                      <apexchart
-                        width="100%"
-                        :height="200"
-                        type="candlestick"
-                        :options="options"
-                        :series="setSeries"
-                        :key="'set-candle-' + candleCount"
-                      ></apexchart>
-                    </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="text-center my-2">
+                <h5>SET</h5>
+              </div>
 
-                    <div class="text-center my-2">
-                      <h5>Relative Strength</h5>
-                    </div>
+              <div class="text-center my-2">
+                <apexchart
+                  width="100%"
+                  :height="1000"
+                  type="candlestick"
+                  :options="options"
+                  :series="setSeries"
+                  :key="'set-candle-' + candleCount"
+                ></apexchart>
+              </div>
 
-                    <div>
-                      <line-chart
-                        :border="'#ef534f'"
-                        :height="200"
-                        :x-show="true"
-                        :key="'sector-line-' + count"
-                        :labels="sectorLabels"
-                        :data="getData('sector', subTab)"
-                      ></line-chart>
-                    </div>
-                  </div>
-                </div>
-              </b-tab>
+              <div class="text-center my-2">
+                <h5>Relative Strength</h5>
+              </div>
+
+              <div>
+                <line-chart
+                  :border="'#ef534f'"
+                  :height="1000"
+                  :x-show="true"
+                  :key="'sector-line-' + count"
+                  :labels="sectorLabels"
+                  :data="getData('sector', subTab)"
+                ></line-chart>
+              </div>
             </div>
-          </b-tabs>
+          </div>
         </b-tab>
       </b-tabs>
     </app-card>
@@ -66,6 +73,7 @@
     },
     data() {
       return {
+        subTab: 'AGRO',
         count: 0,
         candleCount: 0,
         options: {
@@ -135,6 +143,7 @@
       },
       clickSubTab(tab, subTab) {
         this.count++;
+        this.subTab = subTab;
       },
       getData(tab, subTab) {
         let ret = [];
